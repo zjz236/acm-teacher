@@ -1,63 +1,169 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        acm-teacher
-      </h1>
-      <h2 class="subtitle">
-        Welcome to the iView + Nuxt.js template
-      </h2>
-      <div class="links">
-        <Button type="primary" target="_blank" to="https://nuxtjs.org/">
-          Documentation
-        </Button>
-        <Button target="_blank" to="https://github.com/nuxt/nuxt.js">
-          GitHub
-        </Button>
-        <Button target="_blank" to="https://www.iviewui.com/">
-          iView
-        </Button>
-      </div>
+    <div class="admin">
+        <div class="admin-header">
+            <div class="title">
+                <nuxt-link to="/" replace>暨阳考试后台管理系统</nuxt-link>
+            </div>
+            <div class="setting"><span>当前管理员：{{userInfo.name?userInfo.name:''}}</span><span
+                    @click="routerTo('/updateinfo')">修改我的信息</span><span @click="routerTo('/login')">退出系统</span></div>
+        </div>
+        <div class="admin-content">
+            <div class="menu">
+                <Menu active-name="1">
+                    <MenuItem name="1" @click.native="routerTo('/myexamlist')">
+                        <Icon type="md-create" color="#fff"/>
+                        我的考试
+                    </MenuItem>
+                    <MenuItem name="2" @click.native="routerTo('/publicbank')">
+                        <Icon type="ios-photos" color="#fff"/>
+                        公共题库
+                    </MenuItem>
+                    <MenuItem name="3" @click.native="routerTo('/userbank')">
+                        <Icon type="ios-paper" color="#fff"/>
+                        个人题库
+                    </MenuItem>
+                </Menu>
+            </div>
+            <div class="admin-context">
+                <nuxt-child :userInfo="userInfo"/>
+            </div>
+        </div>
+
     </div>
-  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-export default {
-  components: {
-    Logo
-  }
-}
+    import {Drawer, Icon, Menu} from 'iview'
+    import {isLogin} from '../utils/commonUtil';
+    import ajaxService from '../utils/ajaxService'
+
+    export default {
+        name: "index",
+        data() {
+            return {
+                userInfo: {}
+            }
+        },
+        methods: {
+            routerTo(path) {
+                this.$router.replace(path)
+            },
+            getUserInfo() {
+                ajaxService.getUserInfo({}).then(res => {
+                    if (res.code === 1) {
+                        this.userInfo = res.data
+                    }
+                })
+            }
+        },
+        watch: {
+            $route(now, old) {
+                if (now.path != old.path) {
+                    this.getUserInfo()
+                }
+            }
+        },
+        components: {
+            Drawer,
+            Icon,
+            Menu
+        },
+        mounted() {
+            this.getUserInfo()
+        },
+        created() {
+            isLogin()
+        }
+    }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-.links {
-  padding-top: 15px;
-}
+<style lang="scss">
+    .admin {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+
+        .admin-header {
+            width: 100vw;
+            height: 50px;
+            flex: 0 0 auto;
+            background: #101010;
+            display: flex;
+            min-width: 940px;
+
+            .title {
+                color: #9d9d9d;
+                flex: 1 1 50%;
+                float: left;
+                height: 50px;
+                padding: 15px 15px;
+                font-size: 18px;
+                line-height: 20px;
+
+                a {
+                    color: #9d9d9d;
+                }
+
+                a:hover {
+                    color: #fff;
+                }
+
+                .ivu-icon {
+                    margin-left: 30px;
+                }
+
+                .ivu-icon:hover {
+                    color: #fff;
+                }
+            }
+
+            .setting {
+                color: #9d9d9d;
+                flex: 1 1 50%;
+                height: 50px;
+                padding: 15px 15px;
+                font-size: 18px;
+                line-height: 20px;
+                text-align: right;
+
+                span {
+                    margin: 0 15px;
+                    cursor: pointer;
+                }
+
+                span:hover {
+                    color: #fff;
+                }
+            }
+
+        }
+
+        .admin-content {
+            flex: 1;
+            display: flex;
+
+            .menu {
+                .ivu-menu {
+                    flex: 0 0 auto;
+                    height: 100%;
+                    background: rgb(238, 238, 238);
+
+                    .ivu-menu-item {
+                        background: #428bca;
+                        font-size: 14px;
+                        font-weight: 700;
+                        margin-top: 20px;
+                        color: #fff;
+                    }
+                }
+            }
+
+
+            .admin-context {
+                min-width: 700px;
+                flex: 1;
+            }
+        }
+    }
 </style>
