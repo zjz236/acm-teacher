@@ -103,6 +103,11 @@ const ajaxService = {
     getExamProgramInfo:createAssistantApiMethod('/api/examTopic/getExamProgramInfo'),
     deleteExamProgram:createAssistantApiMethod('/api/examTopic/deleteExamProgram'),
     updateExamProgramInfo:createAssistantApiMethod('/api/examTopic/updateExamProgramInfo'),
+    getTestPaper:createAssistantApiMethod('/api/examTopic/getTestPaper'),
     statistics:createAssistantApiMethod('/api/examTopic/statistics'),
+    getProgramStatus:createAssistantApiMethod('/api/evaluating/getProgramStatus'),
+    tfEvaluating:createAssistantApiMethod('/api/evaluating/tfEvaluating'),
+    selectEvaluating:createAssistantApiMethod('/api/evaluating/selectEvaluating'),
+    gapEvaluating:createAssistantApiMethod('/api/evaluating/gapEvaluating'),
 }
 export default ajaxService

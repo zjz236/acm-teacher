@@ -2,7 +2,7 @@ import axios from 'axios';
 import {setCookie, getCookie} from './cookieUtil';
 
 const timeout = 30 * 1000;
-//const baseURL='http://127.0.0.1:2236'
+//const baseURL='http://127.0.0.1:1236'
 const headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 const axiosInstance = axios.create({timeout, headers});
 

@@ -88,7 +88,7 @@
         methods: {
             download() {
                 if (process.client) {
-                    window.location.href = 'http://127.0.0.1:2236/download/template?file=/public/download/templet.xlsx'
+                    window.location.href = 'http://127.0.0.1:1236/download/template?file=/public/download/templet.xlsx'
                 }
             },
             submit() {

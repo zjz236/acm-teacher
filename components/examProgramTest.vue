@@ -16,14 +16,14 @@
             </Form>
             <Table :loading="tableLoad" border :columns="testColumns" :data="testData">
                 <template slot-scope="{row,index}" slot="inputData">
-                    <a :href="'http://127.0.0.1:2236/download/template?file='+programTestData[index].inputData"
+                    <a :href="'http://127.0.0.1:1236/download/template?file='+programTestData[index].inputData"
                        v-if="programTestData.length>index&&programTestData[index].inputData!==''">
                         <Icon type="ios-paper" color="#337ab7"/>
                     </a>
                     <Icon type="md-help-circle" v-else/>
                 </template>
                 <template slot-scope="{row,index}" slot="outputData">
-                    <a :href="'http://127.0.0.1:2236/download/template?file='+programTestData[index].outputData"
+                    <a :href="'http://127.0.0.1:1236/download/template?file='+programTestData[index].outputData"
                        v-if="programTestData.length>index">
                         <Icon type="ios-paper" color="#337ab7" v-if="programTestData.length>index"/>
                     </a>

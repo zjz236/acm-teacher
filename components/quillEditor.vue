@@ -52,7 +52,7 @@
                         name: 'img',              // 后端接收的文件名称
                         action: '/api/upload', // 后端接收文件api
                         response: (res) => {
-                            return 'http://127.0.0.1:2236' + res.url[0] // 此处返回的值一定要直接是后端回馈的图片在服务器的存储路径如：/images/xxx.jpg
+                            return 'http://127.0.0.1:1236' + res.url[0] // 此处返回的值一定要直接是后端回馈的图片在服务器的存储路径如：/images/xxx.jpg
                         }
                     },
                     toolbar: {

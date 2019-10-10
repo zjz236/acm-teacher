@@ -63,7 +63,7 @@
                         title: '题目描述',
                         minWidth: 220,
                         render(h, params) {
-                            return h('div', {}, params.row.description.replace(/<[^>]+>/g, ""))
+                            return h('div', {}, params.row.title)
                         },
                         align:'center'
                     },

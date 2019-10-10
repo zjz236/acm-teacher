@@ -11,7 +11,7 @@ export function getCookie(name) {
 export function setCookie(key, value, path = '/') {
     if (process.client) {
         console.log(document.cookie)
-        document.cookie = `${key}=${value}; max-age=${60 * 60 * 24}; path=${path}`;
+        document.cookie = `${key}=${value}; max-age=${60 * 60 * 24}; path=${path};`;
     }
 }
 

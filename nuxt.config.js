@@ -52,7 +52,7 @@ export default {
 		proxy:true
 	},
 	proxy:{
-		'/api':'http://127.0.0.1:2236'
+		'/api':'http://127.0.0.1:1236'
 	},
 	/*
 	** Build configuration
