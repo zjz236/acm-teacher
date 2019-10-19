@@ -7,7 +7,7 @@
         <Alert type="error" closable>
             {{alertContent}}
         </Alert>
-        <div class="eval">
+        <div class="eval" v-if="examStatus==='ending'">
             <Button type="warning" @click="tfEvaluating" :disabled="test">{{test?'':'评测判断题'}}
                 <Spin v-if="test"></Spin>
             </Button>
@@ -42,7 +42,7 @@
 
 <script>
     import ajaxService from "../../../utils/ajaxService";
-
+    import {getExamStatus} from "../../../utils/commonUtil"
     export default {
         name: "evaluating",
         data() {
@@ -168,12 +168,16 @@
                 return ajaxService.getExamInfo({examId: this.examId}).then(res => {
                     if (res.code === 1) {
                         this.title = res.data.name
+                        this.examStatus=getExamStatus(res.data.finish)
                         this.tfStatus = res.data.tfstatus
                         this.selectStatus = res.data.selectstatus
                         this.gapStatus = res.data.gapstatus
-                        if (res.data.tfstatus !== 1 && res.data.selectstatus !== 1 && res.data.gapstatus !== 1 && this.test) {
+                        if (res.data.tfstatus !== 1 && res.data.selectstatus !== 1 && res.data.gapstatus !== 1) {
                             this.getStudentList()
                             this.test = false
+                        }
+                        if (res.data.tfstatus !== 2 || res.data.selectstatus !== 2 || res.data.gapstatus !== 2) {
+                            this.test = true
                         }
                     }
                 })

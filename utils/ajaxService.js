@@ -4,7 +4,6 @@ import {tokenError} from './commonUtil'
 
 const interceptor = (func) => (param, customTipError) => new Promise((resolve, reject) => {
     func(param).then((res = {}) => {
-        console.log(res)
         if (res.error) {
             console.log(res)
             let errorMessage =
@@ -109,5 +108,6 @@ const ajaxService = {
     tfEvaluating:createAssistantApiMethod('/api/evaluating/tfEvaluating'),
     selectEvaluating:createAssistantApiMethod('/api/evaluating/selectEvaluating'),
     gapEvaluating:createAssistantApiMethod('/api/evaluating/gapEvaluating'),
+    examAnalysis:createAssistantApiMethod('/api/analysis/examAnalysis'),
 }
 export default ajaxService

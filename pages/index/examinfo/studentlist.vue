@@ -38,7 +38,7 @@
                 <span>{{row.sex==1?'男':'女'}}</span>
             </template>
             <template slot="score" slot-scope="{row,index}">
-                <span>{{row.isLogin==0?'未登录':''}}</span>
+                <span>{{row.isLogin==0?'未登录':row.score}}</span>
             </template>
         </Table>
     </div>

@@ -4,11 +4,11 @@
             <MenuItem name="/examinfo/editexam" @click.native="routerTo('/examinfo/editexam')">基本信息</MenuItem>
             <MenuItem name="/examinfo/studentlist" @click.native="routerTo('/examinfo/studentlist')">考生列表</MenuItem>
             <MenuItem name="/examinfo/testpaper" @click.native="routerTo('/examinfo/testpaper')">预览考卷</MenuItem>
-            <MenuItem name="4">发布通知</MenuItem>
-            <MenuItem name="5">试卷分析</MenuItem>
+<!--            <MenuItem name="4">发布通知</MenuItem>-->
+            <MenuItem name="/examinfo/analysis" @click.native="routerTo('/examinfo/analysis')">试卷分析</MenuItem>
             <MenuItem name="/examinfo/evaluating" @click.native="routerTo('/examinfo/evaluating')">考试评测</MenuItem>
-            <MenuItem name="7">作弊检测</MenuItem>
-            <MenuItem name="8">IP查看</MenuItem>
+            <!--<MenuItem name="7">作弊检测</MenuItem>
+            <MenuItem name="8">IP查看</MenuItem>-->
         </Menu>
         <div class="info-content">
             <nuxt-child/>

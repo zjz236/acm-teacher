@@ -14,3 +14,16 @@ export function tokenError() {
 export function isLogin() {
     ajaxService.islogin()
 }
+
+export function getExamStatus(start, finish) {
+    let now = new Date()
+    start = new Date(start)
+    finish = new Date(finish)
+    if (now < start) {
+        return 'pending'
+    } else if (now >= start && now < finish) {
+        return 'starting'
+    } else {
+        return 'ending'
+    }
+}

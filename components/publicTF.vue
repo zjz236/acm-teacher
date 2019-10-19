@@ -1,5 +1,5 @@
 <template>
-    <Modal :width="900" v-model="modalShow" title="从个人题库选题"  @on-cancel="cancelModal">
+    <Modal :width="900" v-model="modalShow" title="从公共题库选题"  @on-cancel="cancelModal">
         <div class="publicTF">
             <div class="search-bar">
                 <Select placeholder="按章节选择" v-model="search" @on-change="searchData"><Option v-for="item in section" :key="item.key" :value="item.key">{{item.name}}</Option></Select>

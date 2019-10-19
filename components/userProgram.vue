@@ -133,7 +133,7 @@
             },
             getUserProgram(){
                 this.load=true
-                ajaxService.getUserProgram({section:this.search,limit:this.pageSize,page:this.currentPage-1,public:0}).then(res=>{
+                ajaxService.getUserProgram({section:this.search,limit:this.pageSize,page:this.currentPage-1,public:0,examId:this.examId}).then(res=>{
                     if (res.code==1){
                         for (let i=0;i<res.data.length;i++){
                             if (res.data[i].option==1){

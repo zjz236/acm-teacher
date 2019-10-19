@@ -22,6 +22,10 @@
                         <Icon type="ios-paper" color="#fff"/>
                         个人题库
                     </MenuItem>
+                    <MenuItem v-if="is_admin" name="4" @click.native="routerTo('/userbank')">
+                        <Icon type="ios-contacts" color="#fff"/>
+                        用户管理
+                    </MenuItem>
                 </Menu>
             </div>
             <div class="admin-context">
@@ -41,7 +45,8 @@
         name: "index",
         data() {
             return {
-                userInfo: {}
+                userInfo: {},
+                is_admin:0
             }
         },
         methods: {
@@ -52,6 +57,7 @@
                 ajaxService.getUserInfo({}).then(res => {
                     if (res.code === 1) {
                         this.userInfo = res.data
+                        this.is_admin=res.data.is_admin
                     }
                 })
             }
