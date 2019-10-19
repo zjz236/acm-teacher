@@ -176,7 +176,7 @@
                             this.getStudentList()
                             this.test = false
                         }
-                        if (res.data.tfstatus !== 2 || res.data.selectstatus !== 2 || res.data.gapstatus !== 2) {
+                        if (res.data.tfstatus === 1 || res.data.selectstatus === 1 || res.data.gapstatus === 1) {
                             this.test = true
                         }
                     }
