@@ -22,7 +22,7 @@
                         <Icon type="ios-paper" color="#fff"/>
                         个人题库
                     </MenuItem>
-                    <MenuItem v-if="is_admin" name="4" @click.native="routerTo('/userbank')">
+                    <MenuItem v-if="is_admin" name="4" @click.native="routerTo('/usermanage')">
                         <Icon type="ios-contacts" color="#fff"/>
                         用户管理
                     </MenuItem>

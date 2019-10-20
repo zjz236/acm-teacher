@@ -133,7 +133,7 @@
             },
             getUserSelect(){
                 this.load=true
-                ajaxService.getUserSelect({section:this.search,limit:this.pageSize,page:this.currentPage-1,public:1}).then(res=>{
+                ajaxService.getUserSelect({examId:this.examId,section:this.search,limit:this.pageSize,page:this.currentPage-1,public:1}).then(res=>{
                     if (res.code==1){
                         for (let i=0;i<res.data.length;i++){
                             if (res.data[i].option==1){

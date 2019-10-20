@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="page">
-            <Page :current="currentPage" :page-size="pageSize" :total="total" />
+            <Page @on-change="pageChange" :current="currentPage" :page-size="pageSize" :total="total" />
         </div>
         <Table :columns="TFColumns" :data="TFData">
             <template slot="section" slot-scope="{row,index}">
@@ -93,6 +93,10 @@
             }
         },
         methods:{
+            pageChange(page){
+                this.currentPage=page
+                this.getExamTFList()
+            },
             updateTF(Id){
                 this.tfId=Id
                 this.upShow=true

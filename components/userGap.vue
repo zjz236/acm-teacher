@@ -133,7 +133,7 @@
             },
             getUserGap(){
                 this.load=true
-                ajaxService.getUserGap({section:this.search,limit:this.pageSize,page:this.currentPage-1,public:0}).then(res=>{
+                ajaxService.getUserGap({examId:this.examId,section:this.search,limit:this.pageSize,page:this.currentPage-1,public:0}).then(res=>{
                     if (res.code==1){
                         for (let i=0;i<res.data.length;i++){
                             if (res.data[i].option==1){
