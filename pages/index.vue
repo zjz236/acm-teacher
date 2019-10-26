@@ -78,6 +78,7 @@
             this.getUserInfo()
         },
         created() {
+            console.log('aaa')
             isLogin()
         }
     }

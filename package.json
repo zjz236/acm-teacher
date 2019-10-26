@@ -11,10 +11,10 @@
     }
   },
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "dev": "cross-env PATH_TYPE=dev nuxt",
+    "build": "cross-env PATH_TYPE=pro nuxt build",
+    "start": "cross-env PATH_TYPE=pro nuxt start",
+    "generate": "cross-env PATH_TYPE=pro nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.6.0",
@@ -31,6 +31,8 @@
     "xlsx": "^0.15.1"
   },
   "devDependencies": {
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "cross-env": "^6.0.3",
     "sass-loader": "^8.0.0"
   }
 }

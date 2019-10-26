@@ -1,3 +1,7 @@
+let plugins=[]
+if (process.env.PATH_TYPE==='pro'){
+	plugins.push('transform-remove-console')
+}
 export default {
 	mode: 'universal',
 	/*
@@ -27,6 +31,9 @@ export default {
 		'quill/dist/quill.bubble.css',
 		'quill/dist/quill.core.css'
 	],
+	env: {
+		PATH_TYPE: process.env.PATH_TYPE
+	},
 	/*
 	** Plugins to load before mounting the App
 	*/
@@ -49,10 +56,6 @@ export default {
 		'@nuxtjs/axios'
 	],
 	axios:{
-		proxy:true
-	},
-	proxy:{
-		'/api':'http://127.0.0.1:1236'
 	},
 	/*
 	** Build configuration
@@ -61,6 +64,9 @@ export default {
 		/*
 		** You can extend webpack config here
 		*/
+		babel:{
+			"plugins":plugins
+		},
 		vendor:['external_library'],
 		extend(config, ctx) {
 		}
