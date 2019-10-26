@@ -121,9 +121,10 @@
             addTeacher(){
                 let user=JSON.parse(JSON.stringify(this.userForm))
                 delete user.Id
+                const self=this
                 ajaxService.addTeacher(user).then(res=>{
                     if (res.code===1){
-                        this.$Message.success('添加成功')
+                        self.$Message.success('添加成功')
                         this.getAllUser()
                     }
                 })
