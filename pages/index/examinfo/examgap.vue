@@ -149,6 +149,11 @@
         },
         created() {
             this.getExamGapList()
+        },
+        head(){
+            return {
+                title:'判断题'
+            }
         }
     }
 </script>

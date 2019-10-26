@@ -130,6 +130,11 @@
         },
         created() {
             this.getExamSelectList()
+        },
+        head(){
+            return {
+                title:'选择题'
+            }
         }
     }
 </script>

@@ -122,6 +122,11 @@
         mounted() {
         },
         created() {
+        },
+        head(){
+            return {
+                title:'添加我的选择题'
+            }
         }
     }
 </script>

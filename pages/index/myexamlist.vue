@@ -135,6 +135,11 @@
         components: {},
         created() {
             this.loadData()
+        },
+        head(){
+            return {
+                title:'我的考试'
+            }
         }
     }
 </script>

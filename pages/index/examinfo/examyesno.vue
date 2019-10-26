@@ -134,6 +134,11 @@
         },
         created() {
           this.getExamTFList()
+        },
+        head(){
+            return {
+                title:'判断题'
+            }
         }
     }
 </script>

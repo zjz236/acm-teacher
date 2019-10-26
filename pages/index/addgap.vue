@@ -123,6 +123,11 @@
         mounted() {
         },
         created() {
+        },
+        head(){
+            return {
+                title:'添加我的填空题'
+            }
         }
     }
 </script>

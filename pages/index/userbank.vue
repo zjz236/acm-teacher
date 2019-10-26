@@ -462,6 +462,11 @@
         },
         created() {
             this.dataFocus(this.menuSelect)
+        },
+        head(){
+            return {
+                title:'个人题库'
+            }
         }
     }
 </script>

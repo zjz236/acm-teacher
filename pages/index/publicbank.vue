@@ -548,6 +548,11 @@
         },
         created() {
             this.dataFocus(this.menuSelect)
+        },
+        head(){
+            return {
+                title:'公共题库'
+            }
         }
     }
 </script>

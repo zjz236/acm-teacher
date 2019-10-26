@@ -86,6 +86,11 @@
         mounted(){
         },
         created() {
+        },
+        head(){
+            return {
+                title:'添加我的判断题'
+            }
         }
     }
 </script>

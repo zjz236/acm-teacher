@@ -144,6 +144,11 @@
                     }
                 })
             }
+        },
+        head(){
+            return {
+                title:'添加我的考试'
+            }
         }
     }
 </script>

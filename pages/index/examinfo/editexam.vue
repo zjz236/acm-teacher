@@ -268,6 +268,11 @@
         created() {
             this.getExamInfo()
             this.statistics()
+        },
+        head(){
+            return {
+                title:'编辑我的考试'
+            }
         }
     }
 </script>

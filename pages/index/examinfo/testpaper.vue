@@ -2,8 +2,6 @@
     <div class="test-paper">
         <div class="title"><h2>预览考卷</h2>
             <div class="btn">
-                <Button @click="userBank=true">从个人题库选题</Button>
-                <Button @click="publicBank=true">从公共题库选题</Button>
             </div>
         </div>
         <div class="paper-content">
@@ -207,6 +205,11 @@
         },
         created() {
             this.getTestPaper()
+        },
+        head(){
+            return {
+                title:'预览考卷'
+            }
         }
     }
 </script>

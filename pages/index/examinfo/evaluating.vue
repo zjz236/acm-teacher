@@ -222,6 +222,11 @@
                     this.getStudentList()
                 })
             })
+        },
+        head(){
+            return {
+                title:this.title+'考试评测'
+            }
         }
     }
 </script>

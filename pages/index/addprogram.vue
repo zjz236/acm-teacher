@@ -119,6 +119,11 @@
         mounted() {
         },
         created() {
+        },
+        head(){
+            return {
+                title:'添加我的程序设计题'
+            }
         }
     }
 </script>

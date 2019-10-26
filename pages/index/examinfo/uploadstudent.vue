@@ -171,6 +171,11 @@
                     reader.readAsBinaryString(file);
                 });
             },
+        },
+        head(){
+            return {
+                title:'上传考生信息'
+            }
         }
     }
 </script>

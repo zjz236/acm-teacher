@@ -123,6 +123,11 @@
                     this.infoValidate = userInfo
                 }
             })
+        },
+        head(){
+            return {
+                title:'修改我的个人信息'
+            }
         }
     }
 </script>

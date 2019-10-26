@@ -44,7 +44,11 @@
     export default {
         name: "index",
         props: ['userInfo'],
-
+        head(){
+            return {
+                title:'暨阳考试后台管理系统'
+            }
+        }
     }
 </script>
 

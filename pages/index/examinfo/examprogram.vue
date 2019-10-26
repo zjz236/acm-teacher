@@ -149,6 +149,11 @@
         },
         created() {
             this.getExamProgramList()
+        },
+        head(){
+            return {
+                title:'程序设计题'
+            }
         }
     }
 </script>

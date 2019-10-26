@@ -367,6 +367,11 @@
         },
         created() {
             this.examAnalysis()
+        },
+        head(){
+            return {
+                title:'试卷分析'
+            }
         }
     }
 </script>
