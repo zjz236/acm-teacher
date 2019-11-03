@@ -3,7 +3,7 @@
         <div class="content">
             <div class="title">暨阳考试后台管理系统</div>
             <div class="time">发布日期-2019年10月</div>
-            <div class="copyright">Copyright © 2014-2019 HDU ACM Team</div>
+            <div class="copyright">Copyright © 2019-2019 ZJYC ACM Team</div>
             <div class="row">
                 <div class="col-l">
                     <table class="table">
