@@ -1,6 +1,6 @@
 <template>
     <div class="add-gap">
-        <div class="title"><h2>添加我的选择题</h2>
+        <div class="title"><h2>添加我的程序填空题</h2>
             <div class="bnt">
                 <Button @click.native="routerTo('/userbank')">返回</Button>
             </div>
@@ -126,7 +126,7 @@
         },
         head(){
             return {
-                title:'添加我的填空题'
+                title:'添加我的程序填空题'
             }
         }
     }
