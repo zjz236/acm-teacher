@@ -2,11 +2,11 @@
     <div class="update-info">
         <div class="title"><h2>修改我的个人信息</h2></div>
         <div class="update-content">
-            <Form ref="infoValidate" :model="infoValidate" label-position="right" :label-width="100" :rules="inforules">
-                <FormItem label="管理员ID">
+            <Form ref="infoValidate" :model="infoValidate" :rules="ruleValidate" label-position="right" :label-width="100">
+                <FormItem label="管理员ID" prop="username">
                     <Input v-model="infoValidate.username" disabled></Input>
                 </FormItem>
-                <FormItem label="姓名">
+                <FormItem label="姓名" prop="name">
                     <Input v-model="infoValidate.name" disabled></Input>
                 </FormItem>
                 <FormItem label="原密码" prop="oldPassword">
@@ -24,10 +24,10 @@
                         <Icon slot="suffix" :type="pwdshow2?'md-eye':'md-eye-off'" @click.native="pwdshow2=!pwdshow2"/>
                     </Input>
                 </FormItem>
-                <FormItem label="学校">
+                <FormItem label="学校" prop="school">
                     <Input v-model="infoValidate.school" disabled></Input>
                 </FormItem>
-                <FormItem label="邮箱">
+                <FormItem label="邮箱" prop="email">
                     <Input v-model="infoValidate.email" disabled></Input>
                 </FormItem>
                 <FormItem>
@@ -77,12 +77,12 @@
                     school: '',
                     email: ''
                 },
-                inforules: {
-                    oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
+                ruleValidate: {
+                    oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'},],
                     newPassword: [
-                        {validator: validatePass, trigger: 'blur'}],
+                        {validator: validatePass,  trigger: 'blur'},],
                     againPassword: [
-                        {validator: validatePassCheck, trigger: 'blur'}],
+                        {validator: validatePassCheck, trigger: 'blur'},],
                 },
                 oldshow: false,
                 pwdshow: false,
@@ -90,13 +90,13 @@
             }
         },
         methods: {
-            isSubmit: function (name) {
+            isSubmit(name) {
                 let self = this
                 self.$refs[name].validate((valid) => {
                     if (valid) {
                         ajaxService.updateUserInfo({
                             oldPassword: self.infoValidate.oldPassword,
-                            newPassword: this.infoValidate.newPassword,
+                            newPassword: self.infoValidate.newPassword,
                             againPassword: self.infoValidate.againPassword
                         }).then(res => {
                             if (res.code == 1) {

@@ -12,7 +12,7 @@
             <FormItem prop="password">
                 <Input :type="pwdshow?'text':'password'" v-model="loginValidate.password" placeholder="密码"
                        @keyup.enter.native="submit('loginValidate')">
-                    <Icon slot="suffix" :type="pwdshow?'md-eye-off':'md-eye'" @click.native="pwdshow=!pwdshow"/>
+                    <Icon slot="suffix" :type="pwdshow?'md-eye':'md-eye-off'" @click.native="pwdshow=!pwdshow"/>
                 </Input>
             </FormItem>
             <FormItem>

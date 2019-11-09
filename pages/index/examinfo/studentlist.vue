@@ -3,7 +3,7 @@
         <div class="title"><h2>考生列表</h2>
             <div class="bnt">
                 <Button @click.native="routerTo('/examinfo/addstudent')">添加考生</Button>
-                <Button>导出学生信息</Button>
+<!--                <Button @click="exportStudent">导出学生信息</Button>-->
                 <Button @click.native="routerTo('/examinfo/uploadstudent')">导入学生信息</Button>
                 <!--                <Button>下载所有学生试卷</Button>-->
             </div>
@@ -66,7 +66,8 @@
 
 <script>
     import ajaxService from '../../../utils/ajaxService';
-
+    import {setCookie, getCookie} from '@/utils/cookieUtil';
+    import axios from 'axios'
     export default {
         name: "studentlist",
         data() {
@@ -168,6 +169,33 @@
             pageChange(e) {
                 this.currentPage = e
                 this.getStudentList()
+            },
+            exportStudent(){
+                let baseURL='http://127.0.0.1:1236'
+                if (process.env.PATH_TYPE==='pro') {
+                    baseURL='https://zjyc.zjzhmx.xyz'
+                }
+                axios({ // 用axios发送post请求
+                    method: 'post',
+                    url: baseURL+'/api/student/exportStudent', // 请求地址
+                    data: {examId:this.examId}, // 参数
+                    responseType: 'blob', // 表明返回服务器返回的数据类型
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': getCookie('token') || ''
+                    }
+                }).then(res=>{
+                    const blob = new Blob([res]);
+                    const fileName = '统计.xlsx';
+                    const elink = document.createElement('a');
+                    elink.download = fileName;
+                    elink.style.display = 'none';
+                    elink.href = URL.createObjectURL(blob);
+                    document.body.appendChild(elink);
+                    elink.click();
+                    URL.revokeObjectURL(elink.href); // 释放URL 对象
+                    document.body.removeChild(elink);
+                })
             },
             getExamInfo() {
                 let examId = this.$route.query.id

@@ -48,6 +48,7 @@ const ajaxService = {
     getStudentList: createAssistantApiMethod('/api/student/getStudentList'),
     updateStudent: createAssistantApiMethod('/api/student/updateStudent'),
     deleteStudent: createAssistantApiMethod('/api/student/deleteStudent'),
+    exportStudent: createAssistantApiMethod('/api/student/exportStudent'),
     addTF: createAssistantApiMethod('/api/topic/addTF'),
     getTFList: createAssistantApiMethod('/api/topic/getTFList'),
     addSelect:createAssistantApiMethod('/api/topic/addSelect'),
