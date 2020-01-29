@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.pending {
+  color: #67C23A;
+}
+.starting {
+  color: #F56C6C;
+}
+.ending {
+  color: #909399;
+}
+
+.page {
+  width: 90%;
+  height: 100px;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.el-icon-pointer {
+  cursor: pointer;
+}

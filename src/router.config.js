@@ -1,16 +1,165 @@
 import Home from '@/pages/Home'
 import Login from '@/pages/Login'
+import Index from '@/pages/Index'
+import ExamList from '@/pages/ExamList'
+import ExamModify from '@/pages/ExamModify'
+import Classes from '@/pages/Classes'
+import ClassesModify from '@/pages/ClassesModify'
+import ExamManage from '@/pages/ExamManage'
+import ExamEdit from '@/pages/examManage/ExamEdit'
+import Examinee from '@/pages/examManage/Examinee'
+import ExamineeAdd from "@/pages/examManage/ExamineeAdd"
+import ExamineeModify from "@/pages/examManage/ExamineeModify"
+import Topic from "@/pages/topic/Topic"
+import TFTopic from "@/pages/topic/TFTopic"
+import SelectTopic from "@/pages/topic/SelectTopic"
+import GapTopic from "@/pages/topic/GapTopic"
+import ProgramTopic from "@/pages/topic/ProgramTopic"
+import IDE from "@/pages/IDE"
+
 export default {
-    routes: [
+  mode: 'history',
+  base: '/admin/',
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home,
+      children: [
         {
-            path: '/',
-            name: 'index',
-            component: Home
+          path: '/',
+          name: 'index',
+          component: Index
         },
         {
-            path: '/login',
-            name: 'login',
-            component: Login
+          path: '/examList',
+          name: 'examList',
+          component: ExamList
+        },
+        {
+          path: '/addExam',
+          name: 'addExam',
+          component: ExamModify
+        },
+        {
+          path: '/classes',
+          name: 'classes',
+          component: Classes
+        },
+        {
+          path: '/addClasses',
+          name: 'addClasses',
+          component: ClassesModify
+        },
+        {
+          path: '/editClasses/:id',
+          name: 'editClasses',
+          component: ClassesModify
+        },
+        {
+          path: '/examManage',
+          name: 'examManage',
+          component: ExamManage,
+          redirect: '/examManage/examEdit/:examId',
+          children: [
+            {
+              path: 'examEdit/:examId',
+              name: 'examEdit',
+              component: ExamEdit
+            },
+            {
+              path: 'examinee/:examId',
+              name: 'examinee',
+              component: Examinee
+            },
+            {
+              path: 'examineeAdd/:examId',
+              name: 'examineeAdd',
+              component: ExamineeAdd
+            },
+            {
+              path: 'examineeModify/add/:examId',
+              name: 'examineeModifyAdd',
+              component: ExamineeModify
+            },
+            {
+              path: 'examineeModify/edit/:examId/:examineeId',
+              name: 'examineeModifyEdit',
+              component: ExamineeModify
+            }
+          ]
+        },
+        {
+          path: '/topic',
+          redirect: '/topic/mine'
+        },
+        {
+          name: 'mineTopic',
+          path: '/topic/mine',
+          component: Topic,
+          redirect: '/topic/mine/tfTopic',
+          children: [
+            {
+              path: 'tfTopic',
+              name: 'mineTF',
+              component: TFTopic
+            },
+            {
+              path: 'selectTopic',
+              name: 'mineSelect',
+              component: SelectTopic
+            },
+            {
+              path: 'gapTopic',
+              name: 'mineGap',
+              component: GapTopic
+            },
+            {
+              path: 'programTopic',
+              name: 'mineProgram',
+              component: ProgramTopic
+            }
+          ]
+        },
+        {
+          name: 'commonTopic',
+          path: '/topic/common',
+          component: Topic,
+          redirect: '/topic/common/tfTopic',
+          children: [
+            {
+              path: 'tfTopic',
+              name: 'commonTF',
+              component: TFTopic
+            },
+            {
+              path: 'selectTopic',
+              name: 'commonSelect',
+              component: SelectTopic
+            },
+            {
+              path: 'gapTopic',
+              name: 'commonGap',
+              component: GapTopic
+            },
+            {
+              path: 'programTopic',
+              name: 'commonProgram',
+              component: ProgramTopic
+            }
+          ]
+        },
+        {
+          path: '/ide',
+          name: 'ide',
+          component: IDE
         }
-    ]
+      ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    }
+  ]
 }
