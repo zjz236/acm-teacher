@@ -13,7 +13,7 @@
 				</div>
 			</template>
 		</page-title>
-		<el-table style="width: 90%;margin-top: 30px;" :data="tableData">
+		<el-table style="width: 90%;margin-top: 30px;" :data="tableData" max-height="400px">
 			<el-table-column label="学校" prop="school"></el-table-column>
 			<el-table-column label="学院" prop="college"></el-table-column>
 			<el-table-column label="专业" prop="major"></el-table-column>

@@ -7,14 +7,22 @@ import Classes from '@/pages/Classes'
 import ClassesModify from '@/pages/ClassesModify'
 import ExamManage from '@/pages/ExamManage'
 import ExamEdit from '@/pages/examManage/ExamEdit'
-import Examinee from '@/pages/examManage/Examinee'
-import ExamineeAdd from "@/pages/examManage/ExamineeAdd"
-import ExamineeModify from "@/pages/examManage/ExamineeModify"
+import Examinee from '@/pages/examManage/examinee/Examinee'
+import ExamineeAdd from "@/pages/examManage/examinee/ExamineeAdd"
+import ExamineeModify from "@/pages/examManage/examinee/ExamineeModify"
 import Topic from "@/pages/topic/Topic"
 import TFTopic from "@/pages/topic/TFTopic"
 import SelectTopic from "@/pages/topic/SelectTopic"
 import GapTopic from "@/pages/topic/GapTopic"
 import ProgramTopic from "@/pages/topic/ProgramTopic"
+import ExamTFTopic from "@/pages/examManage/topic/TFTopic"
+import ExamSelectTopic from "@/pages/examManage/topic/SelectTopic"
+import ExamGapTopic from "@/pages/examManage/topic/GapTopic"
+import ExamProgramTopic from "@/pages/examManage/topic/ProgramTopic"
+import ExamGrade from "@/pages/examManage/ExamGrade"
+import ExamReader from "@/pages/examManage/ExamReader"
+import ExamAnalysis from "@/pages/examManage/ExamAnalysis"
+import UserManage from '@/pages/UserManage'
 import IDE from "@/pages/IDE"
 
 export default {
@@ -86,6 +94,41 @@ export default {
               path: 'examineeModify/edit/:examId/:examineeId',
               name: 'examineeModifyEdit',
               component: ExamineeModify
+            },
+            {
+              path: 'tfTopic/:examId',
+              name: 'examTFTopic',
+              component: ExamTFTopic
+            },
+            {
+              path: 'selectTopic/:examId',
+              name: 'examSelectTopic',
+              component: ExamSelectTopic
+            },
+            {
+              path: 'gapTopic/:examId',
+              name: 'examGapTopic',
+              component: ExamGapTopic
+            },
+            {
+              path: 'programTopic/:examId',
+              name: 'examProgramTopic',
+              component: ExamProgramTopic
+            },
+            {
+              path: 'examGrade/:examId',
+              name: 'examGrade',
+              component: ExamGrade
+            },
+            {
+              path: 'examReader/:examId',
+              name: 'examReader',
+              component: ExamReader
+            },
+            {
+              path: 'examAnalysis/:examId',
+              name: 'examAnalysis',
+              component: ExamAnalysis
             }
           ]
         },
@@ -153,6 +196,11 @@ export default {
           path: '/ide',
           name: 'ide',
           component: IDE
+        },
+        {
+          path: '/userManage',
+          name: 'userManage',
+          component: UserManage
         }
       ]
     },

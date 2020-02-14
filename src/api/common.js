@@ -1,5 +1,6 @@
 import ajaxService from './ajaxServices'
 
 export default {
-  ide: ajaxService.createAssistantApiMethodPost('/oj/ide')
+  addIDEData: ajaxService.createAssistantApiMethodPost('/oj/ide/addIDEData'),
+  getIDEData: ajaxService.createAssistantApiMethodGet('/oj/ide/getIDEData')
 }

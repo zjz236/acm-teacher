@@ -1,14 +1,14 @@
 <template>
 	<editor
 			ref="myEditor" :value="value" @input="inputChange" @init="editorInit" :lang="lang"
-			:theme="theme" :height="height"></editor>
+			:theme="theme" :height="height" :options="options"></editor>
 </template>
 
 <script>
   import Editor from 'vue2-ace-editor'
 
   export default {
-    name: "AceEditor",
+    name: 'AceEditor',
     components: {Editor},
     props: {
       readonly: {
@@ -30,6 +30,12 @@
       theme: {
         type: String,
         default: 'clouds'
+      }
+    },
+    data() {
+      return {
+        options: {
+        }
       }
     },
     methods: {

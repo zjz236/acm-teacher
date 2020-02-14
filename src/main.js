@@ -15,7 +15,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Quill.register('modules/ImageExtend', ImageExtend)
-Vue.prototype.ossUrl= 'http://jiyang-oj.oss-cn-beijing.aliyuncs.com/'
+Vue.prototype.ossUrl= 'http://127.0.0.1:7001/public/'
 Vue.use(VueRouter)
 Vue.use(ElementUI)
 Vue.use(Vuex)

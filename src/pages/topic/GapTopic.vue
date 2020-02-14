@@ -8,13 +8,13 @@
 							@click="addTF"></el-button>
 				</el-tooltip>
 			</div>
-			<el-table :data="tableData" @filter-change="filterData">
+			<el-table :data="tableData" @filter-change="filterData" max-height="400px">
 				<el-table-column show-overflow-tooltip label="题目描述">
 					<template slot-scope="scope">
 						{{ matchReg(scope.row.description) }}
 					</template>
 				</el-table-column>
-				<el-table-column show-overflow-tooltip label="题目章节" :filters="section">
+				<el-table-column show-overflow-tooltip label="题目章节" :filters="section" :filtered-value="filters">
 					<template slot-scope="scope">
 						{{section.filter(item=>item.value === scope.row.section).map(item=>item.text).join('')}}
 					</template>
@@ -57,21 +57,22 @@
 		</el-card>
 		<gap-modify :disabled="editDisable" :loading="formLoading" v-model="visible" :data="formData" :editable="editable"
 								@save="topicModify"></gap-modify>
-		<gap-test :disabled="editDisable" @delete-test="deleteGapTest" gap-type="gapTestData" :gap-id="topicId" :test-data="testDataInfo" @on-submit="handleTestSubmit" :code="allCode"
+		<gap-test :disabled="editDisable" @delete-test="deleteGapTest" gap-type="gapTestData" :gap-id="topicId"
+							:test-data="testDataInfo" @on-submit="handleTestSubmit" :code="allCode"
 							v-model="testVisible"></gap-test>
 	</div>
 </template>
 
 <script>
-  import GapModify from "@/components/GapModify"
-  import GapTest from "@/components/GapTest"
-  import testData from "@/api/testData"
-  import api from "@/api/topic"
-  import {matchReg, section, gapCodeShow} from "@/common/common"
-  import {mapState} from "vuex";
+  import GapModify from '@/components/GapModify'
+  import GapTest from '@/components/GapTest'
+  import testData from '@/api/testData'
+  import api from '@/api/topic'
+  import {matchReg, section, gapCodeShow} from '@/common/common'
+  import {mapState} from 'vuex'
 
   export default {
-    name: "GapTopic",
+    name: 'GapTopic',
     components: {GapModify, GapTest},
     data() {
       return {
@@ -117,7 +118,7 @@
     methods: {
       async deleteGapTest() {
         try {
-          const result = await testData.deleteGapTest({gapId: this.topicId})
+          const result = await testData.deleteGapTest({gapId: this.topicId, topicType: 'gapTestData'})
           if (result.code) {
             this.testShow({code: this.code, gaps: this.gaps, topicId: this.topicId})
           }
@@ -177,7 +178,7 @@
       },
       async testShow({code, gaps, topicId}) {
         try {
-          const {data} = await testData.getGapTestInfo({gapId: topicId})
+          const {data} = await testData.getGapTestInfo({gapId: topicId, topicType: 'gapTestData'})
           this.testDataInfo = data
           this.code = code
           this.gaps = gaps
@@ -213,6 +214,7 @@
       async handleTestSubmit(value) {
         const formdata = value
         formdata.append('gapId', this.topicId)
+        formdata.append('topicType', 'gapTestData')
         try {
           const res = await testData.gapTestSubmit(formdata)
           if (res.code) {
@@ -242,14 +244,15 @@
       async getTopicList() {
         this.tableLoading = true
         try {
-          const {data} = await api.getTopicList({
+          const {data: {list, total}} = await api.getTopicList({
             common: this.common,
             topicType: 'gapTopic',
             pageNo: this.pageNo,
             pageSize: this.pageSize,
             filters: this.filters.join(',')
           })
-          this.tableData = data.list
+          this.tableData = list
+          this.total = total
         } catch (e) {
           console.error(e)
         } finally {

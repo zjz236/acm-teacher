@@ -3,7 +3,7 @@
 		<el-container>
 			<el-aside width="300px">
 				<el-menu
-						:default-active="defaultActive"
+					:default-active="defaultActive"
 				>
 					<el-menu-item index="examEdit" @click="linkGo('examEdit')">
 						<i class="el-icon-edit"></i>
@@ -12,6 +12,18 @@
 					<el-menu-item index="examinee" @click="linkGo('examinee')">
 						<i class="el-icon-user"></i>
 						<span slot="title">考生管理</span>
+					</el-menu-item>
+					<el-menu-item index="examGrade" @click="linkGo('examGrade')">
+						<i class="el-icon-thumb"></i>
+						<span slot="title">考试评测</span>
+					</el-menu-item>
+					<el-menu-item index="examReader" @click="linkGo('examReader')">
+						<i class="el-icon-receiving"></i>
+						<span slot="title">试卷预览</span>
+					</el-menu-item>
+					<el-menu-item index="examAnalysis" @click="linkGo('examAnalysis')">
+						<i class="el-icon-document-checked"></i>
+						<span slot="title">试卷分析</span>
 					</el-menu-item>
 				</el-menu>
 			</el-aside>
@@ -23,10 +35,10 @@
 </template>
 
 <script>
-  import {examMenu} from "@/common/common"
+  import {examMenu} from '@/common/common'
 
   export default {
-    name: "examManage",
+    name: 'examManage',
     data() {
       return {}
     },
@@ -44,7 +56,9 @@
     },
     methods: {
       linkGo(routeName) {
-        this.$router.push({name: routeName}).catch(err=>{err})
+        this.$router.push({name: routeName}).catch(err => {
+          err
+        })
       }
     }
   }

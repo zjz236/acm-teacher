@@ -12,7 +12,7 @@
 					<el-button type="primary" icon="el-icon-plus" circle @click="linkAdd('examineeModifyAdd')"></el-button>
 				</el-tooltip>
 			</div>
-			<el-table :data="tableData" @sort-change="sortChange">
+			<el-table :data="tableData" @sort-change="sortChange" max-height="400px">
 				<el-table-column label="学校" prop="school" width="200"></el-table-column>
 				<el-table-column label="学院" prop="college"></el-table-column>
 				<el-table-column label="专业" prop="major"></el-table-column>

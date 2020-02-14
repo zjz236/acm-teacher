@@ -5,10 +5,16 @@
 				<div class="logo">
 					<el-avatar :src="logo"></el-avatar>
 					<div class="title">暨阳Online Judge</div>
+					<el-button
+						@click="runner" class="none-button" size="mini" v-if="runnerStatus" icon="el-icon-video-pause"
+						type="info">暂停轮训
+					</el-button>
+					<el-button @click="runner" class="none-button" size="mini" v-else icon="el-icon-video-play" type="info">开始轮训
+					</el-button>
 				</div>
 				<el-menu
-						:default-active="defaultActive" @select="handleSelect" mode="horizontal" background-color="#24292e"
-						text-color="#fff" active-text-color="#409EFF">
+					:default-active="defaultActive" @select="handleSelect" mode="horizontal" background-color="#24292e"
+					text-color="#fff" active-text-color="#409EFF">
 					<el-menu-item index="index">首页</el-menu-item>
 					<el-menu-item index="examList">考试管理</el-menu-item>
 					<el-submenu index="topic">
@@ -17,7 +23,7 @@
 						<el-menu-item index="mine">个人题库</el-menu-item>
 					</el-submenu>
 					<el-menu-item index="classes">班级管理</el-menu-item>
-					<el-menu-item index="users" v-if="isAdmin">用户管理</el-menu-item>
+					<el-menu-item index="userManage" v-if="isAdmin">用户管理</el-menu-item>
 					<el-menu-item index="ide">在线IDE</el-menu-item>
 				</el-menu>
 				<div class="setting">
@@ -45,18 +51,20 @@
   import logo from '@/assets/images/white-logo.png'
   import moment from 'moment'
   import api from '@/api/account'
+  import run from '@/api/round'
   import {mapState, mapActions} from 'vuex'
-  import {routerMenu, routerActive} from "@/common/common"
+  import {routerMenu, routerActive} from '@/common/common'
 
   export default {
-    name: "home",
+    name: 'home',
     data() {
       return {
         logo,
         name: '',
         time: moment().format('YYYY年MM月DD日 HH:mm:ss'),
         isAdmin: false,
-        activeMenu: ''
+        activeMenu: '',
+        runnerStatus: false
       }
     },
     computed: {
@@ -70,6 +78,9 @@
           if (routerActive[key].indexOf(routeName) > -1) {
             active = key
           }
+        }
+        if (routeName === 'userManage') {
+          active = 'userManage'
         }
         return active
       }
@@ -90,12 +101,44 @@
           console.error(e)
         }
       },
+      async runner() {
+        try {
+          await run.runner({
+            status: !this.runnerStatus
+          })
+        } catch (e) {
+          console.error(e)
+        } finally {
+          this.getRunnerStatus()
+        }
+      },
+      async getRunnerStatus() {
+        try {
+          const {data} = await run.getRunnerStatus()
+          this.runnerStatus = data.status
+        } catch (e) {
+          console.error(e)
+        }
+      },
       handleSelect(key) {
+        if (key === 'userManage') {
+          this.$router.replace({name: 'userManage'}).catch(err => {
+            err
+          })
+          return
+        }
         this.$router.replace({name: routerMenu[key]}).catch(err => {
           err
         })
       },
       ...mapActions(['updateUser'])
+    },
+    watch: {
+      isAdmin(val) {
+        if (val) {
+          this.getRunnerStatus()
+        }
+      }
     },
     mounted() {
       setInterval(() => {
@@ -149,6 +192,11 @@
 					margin-right: 20px;
 				}
 			}
+		}
+
+		.none-button {
+			background: none;
+			margin-left: 10px;
 		}
 
 		.el-main {

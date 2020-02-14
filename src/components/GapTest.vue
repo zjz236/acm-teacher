@@ -170,8 +170,12 @@
             let time = null
             time = setInterval(async () => {
               try {
-                const {data} = await api.gapTestStatus({id})
-                if (data.status === 1) {
+                const {data} = await api.gapTestStatus({
+                  id,
+                  gapId: this.gapId,
+                  gapType: this.gapType
+                })
+                if (['Queuing', 'Running'].indexOf(data.status) < 0) {
                   resolve(data)
                   clearInterval(time)
                 }
@@ -181,9 +185,9 @@
               }
             }, 500)
           })
-          if (result.err) {
+          if (result.status === 'Compile Error') {
             this.result = 'error'
-            this.errMsg = result.err
+            this.errMsg = result.errMsg
           } else {
             if (result.result === 0) {
               this.result = 'wrong'
@@ -248,6 +252,9 @@
     },
     watch: {
       visible(val) {
+        if (val === false) {
+          this.input = this.output = null
+        }
         this.$emit('input', val)
       },
       value(val) {

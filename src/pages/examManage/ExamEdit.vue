@@ -59,10 +59,10 @@
 					<el-col :span="21">
 						<el-form-item prop="language">
 							<el-select v-model="examForm.language">
-								<el-option :value="0" label="C语言"></el-option>
-								<el-option :value="1" label="C++"></el-option>
-								<el-option :value="2" label="Java"></el-option>
-								<el-option :value="3" label="Python"></el-option>
+								<el-option value="c" label="C语言"></el-option>
+								<el-option value="cpp" label="C++"></el-option>
+								<el-option value="java" label="Java"></el-option>
+								<el-option value="python" label="Python"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
@@ -108,16 +108,28 @@
 				</el-form-item>
 			</el-form>
 		</el-card>
-		<el-card class="exam-topic"></el-card>
+		<el-card class="exam-topic">
+			<el-table :data="examTopic">
+				<el-table-column label="题型" align="center">
+					<template slot-scope="scope">
+						<span
+								style="cursor: pointer;color: cornflowerblue"
+								@click="$router.push({name: scope.row.routeName, params: {examId}})">{{scope.row.topicName}}</span>
+					</template>
+				</el-table-column>
+				<el-table-column label="数量" prop="num" align="center"></el-table-column>
+			</el-table>
+		</el-card>
 	</div>
 </template>
 
 <script>
   import api from '@/api/exam'
+  import examTopic from '@/api/examTopic'
   import moment from 'moment'
 
   export default {
-    name: "ExamEdit",
+    name: 'ExamEdit',
     data() {
       return {
         examForm: {
@@ -137,6 +149,32 @@
             {required: true, message: '请填写考试名称', trigger: 'blur'}
           ]
         },
+        examTopic: [
+          {
+            topicType: 'tfTopic',
+            topicName: '判断题',
+            routeName: 'examTFTopic',
+            num: 0
+          },
+          {
+            topicType: 'selectTopic',
+            topicName: '选择题',
+            routeName: 'examSelectTopic',
+            num: 0
+          },
+          {
+            topicType: 'gapTopic',
+            topicName: '程序填空题',
+            routeName: 'examGapTopic',
+            num: 0
+          },
+          {
+            topicType: 'programTopic',
+            topicName: '程序设计题',
+            routeName: 'examProgramTopic',
+            num: 0
+          }
+        ],
         examId: this.$route.params.examId
       }
     },
@@ -151,6 +189,16 @@
       resetForm() {
         this.getExamInfo()
       },
+      async getExamTopicNum() {
+        try {
+          const {data} = await examTopic.getExamTopicNum({examId: this.examId})
+          for (const item of this.examTopic) {
+            item.num = data[item.topicType]
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      },
       async examEdit() {
         try {
           const finishTime = moment(this.examForm.startTime).add({
@@ -162,7 +210,7 @@
           const res = await api.examEdit({
             ...this.examForm,
             finishTime,
-						examId: this.examId
+            examId: this.examId
           })
           if (res.code) {
             this.$message.success(res.msg)
@@ -195,6 +243,7 @@
     },
     mounted() {
       this.getExamInfo()
+      this.getExamTopicNum()
     }
   }
 </script>
@@ -211,6 +260,7 @@
 		.exam-topic {
 			flex: 1 1 40%;
 			margin: 0 50px;
+			height: 400px;
 		}
 	}
 </style>

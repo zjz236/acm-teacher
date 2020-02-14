@@ -16,10 +16,10 @@
 										style="width: 95%; height: 95%;"></ace-editor>
 			</div>
 			<div class="editor-bt">
-				<el-button type="info" @click="ide">运行</el-button>
+				<el-button type="info" @click="addIDEData">运行</el-button>
 			</div>
 			<div class="editor">
-				<ace-editor :value="outputData" theme="tomorrow_night_bright" lang="powershell"
+				<ace-editor v-model="outputData" theme="tomorrow_night_bright" lang="powershell"
 										style="width: 95%; height: 95%;"></ace-editor>
 			</div>
 		</div>
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-  import AceEditor from "@/components/AceEditor"
+  import AceEditor from '@/components/AceEditor'
   import api from '@/api/common'
 
   export default {
-    name: "IDE",
+    name: 'IDE',
     components: {
       AceEditor
     },
@@ -56,17 +56,47 @@
       }
     },
     methods: {
-      async ide() {
+      async addIDEData() {
         try {
-          const {data} = await api.ide({
+          this.loading = true
+          const {data} = await api.addIDEData({
             code: this.code,
             language: this.language,
             inputData: this.inputData,
           })
-          this.outputData = data.output
-          console.log(this.outputData)
+          this.getIDEData(data.insertedId)
+          console.log(data)
         } catch (e) {
           console.error(e)
+          this.loading = false
+        }
+      },
+      async getIDEData(id) {
+        try {
+          const result = await new Promise((resolve, reject) => {
+            const timer = setInterval(async () => {
+              try {
+                const {data} = await api.getIDEData({id})
+                if (['Queuing', 'Running'].indexOf(data.status) < 0) {
+                  resolve(data)
+                  clearInterval(timer)
+                }
+              } catch (e) {
+                console.error(e)
+                reject(e)
+                clearInterval(timer)
+              }
+            }, 500)
+          })
+          if (result.status === 'Compile') {
+            this.outputData = result.outputData
+          } else {
+            this.outputData = result.errMsg
+          }
+        } catch (e) {
+          console.error(e)
+        } finally {
+          this.loading = false
         }
       }
     }

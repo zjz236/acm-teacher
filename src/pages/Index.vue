@@ -36,8 +36,8 @@
       PageTitle
 		},
     watch: {
-      userInfo() {
-        this.getUserInfo()
+      userInfo(val) {
+        this.getUserInfo(val)
       }
     },
     data() {
@@ -47,39 +47,42 @@
       }
     },
     methods: {
-      getUserInfo() {
+      getUserInfo(val) {
         let tableData = []
-        for (let key in this.userInfo) {
+        for (let key in val) {
           switch (key) {
             case 'sex':
               tableData.push({
                 value: userKey[key],
-                label: getSex[this.userInfo[key]]
+                label: getSex[val[key]]
               })
               break
             case 'isAdmin':
               tableData.push({
                 value: userKey[key],
-                label: this.userInfo[key] ? '管理员' : '普通用户'
+                label: val[key] ? '管理员' : '普通用户'
               })
               break
             case 'createTime':
               tableData.push({
                 value: userKey[key],
-                label: moment(this.userInfo[key]).format('YYYY年MM月DD日')
+                label: moment(val[key]).format('YYYY年MM月DD日')
               })
               break
             default:
               tableData.push({
                 value: userKey[key],
-                label: this.userInfo[key]
+                label: val[key]
               })
               break
           }
         }
         this.tableData = tableData
       }
-    }
+    },
+		mounted() {
+      this.getUserInfo(this.userInfo)
+		}
   }
 </script>
 

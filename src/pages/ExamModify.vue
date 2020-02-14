@@ -60,10 +60,10 @@
 					<el-col :span="21">
 						<el-form-item prop="language">
 							<el-select v-model="examForm.language">
-								<el-option :value="0" label="C语言"></el-option>
-								<el-option :value="1" label="C++"></el-option>
-								<el-option :value="2" label="Java"></el-option>
-								<el-option :value="3" label="Python"></el-option>
+								<el-option value="c" label="C语言"></el-option>
+								<el-option value="cpp" label="C++"></el-option>
+								<el-option value="java" label="Java"></el-option>
+								<el-option value="python" label="Python"></el-option>
 							</el-select>
 						</el-form-item>
 					</el-col>
@@ -129,7 +129,7 @@
           finishDate: 0,
           finishHour: 0,
           finishMinute: 0,
-          language: 0,
+          language: 'c',
           isExam: 0,
           isSort: 0,
           note: ''

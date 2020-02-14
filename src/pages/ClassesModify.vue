@@ -86,7 +86,7 @@
 		</page-title>
 		<el-dialog :title="getProgress()" :visible.sync="dialogVisible" width="500px">
 			<el-progress type="circle" v-if="progressVisible" :percentage="progress"></el-progress>
-			<el-table v-if="warnVisible" :data="warnData" max-height="300px">
+			<el-table v-if="warnVisible" :data="warnData" max-height="400px">
 				<el-table-column label="编号">
 					<template slot-scope="scope">
 						{{scope.$index+1}}

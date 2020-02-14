@@ -8,13 +8,13 @@
 							@click="addTF"></el-button>
 				</el-tooltip>
 			</div>
-			<el-table :data="tableData" @filter-change="filterData">
+			<el-table :data="tableData" @filter-change="filterData" max-height="400px">
 				<el-table-column show-overflow-tooltip label="题目描述">
 					<template slot-scope="scope">
 						{{ matchReg(scope.row.description) }}
 					</template>
 				</el-table-column>
-				<el-table-column show-overflow-tooltip label="题目章节" :filters="section">
+				<el-table-column show-overflow-tooltip label="题目章节" :filters="section" :filtered-value="filters">
 					<template slot-scope="scope">
 						{{section.filter(item=>item.value === scope.row.section).map(item=>item.text).join('')}}
 					</template>
@@ -52,13 +52,13 @@
 </template>
 
 <script>
-  import TFModify from "@/components/TFModify"
-  import api from "@/api/topic"
-  import {matchReg, section} from "@/common/common"
-  import {mapState} from "vuex";
+  import TFModify from '@/components/TFModify'
+  import api from '@/api/topic'
+  import {matchReg, section} from '@/common/common'
+  import {mapState} from 'vuex'
 
   export default {
-    name: "tfTopic",
+    name: 'tfTopic',
     components: {TFModify},
     data() {
       return {
@@ -183,14 +183,15 @@
       async getTopicList() {
         this.tableLoading = true
         try {
-          const {data} = await api.getTopicList({
+          const {data: {list, total}} = await api.getTopicList({
             common: this.common,
             topicType: 'tfTopic',
             pageNo: this.pageNo,
             pageSize: this.pageSize,
             filters: this.filters.join(',')
           })
-          this.tableData = data.list
+          this.tableData = list
+          this.total = total
         } catch (e) {
           console.error(e)
         } finally {

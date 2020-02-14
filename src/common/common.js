@@ -19,18 +19,33 @@ export const routerMenu = {
   common: 'commonTopic',
   ide: 'ide'
 }
-export const languages = ['C语言', 'C++', 'Java', 'Python']
+export const languages = {c: 'C语言', cpp: 'C++', java: 'Java', python: 'Python'}
 export const routerActive = {
   index: ['index'],
-  examList: ['examList', 'addExam', 'examEdit', 'examinee', 'examineeAdd', 'examineeModifyAdd', 'examineeModifyEdit'],
+  examList: ['examList',
+    'addExam', 'examEdit',
+    'examinee',
+    'examineeAdd',
+    'examineeModifyAdd',
+    'examineeModifyEdit',
+    'examTFTopic',
+    'examSelectTopic',
+    'examGapTopic',
+    'examProgramTopic',
+    'examGrade',
+    'examReader',
+    'examAnalysis'],
   classes: ['classes', 'addClasses'],
   mine: ['mineTopic', 'mineTF', 'mineSelect', 'mineGap', 'mineProgram'],
   common: ['commonTopic', 'commonTF', 'commonSelect', 'commonGap', 'commonProgram'],
   ide: ['ide']
 }
 export const examMenu = {
-  examEdit: ['examEdit'],
-  examinee: ['examinee', 'examineeAdd', 'examineeModifyAdd', 'examineeModifyEdit']
+  examEdit: ['examEdit', 'examTFTopic', 'examSelectTopic', 'examGapTopic', 'examProgramTopic'],
+  examinee: ['examinee', 'examineeAdd', 'examineeModifyAdd', 'examineeModifyEdit'],
+  examGrade: ['examGrade'],
+  examReader: ['examReader'],
+  examAnalysis: ['examAnalysis']
 }
 export const topicMenu = {
   tfTopic: ['mineTF', 'commonTF'],
@@ -282,7 +297,7 @@ export const section = [
 export const difficulty = [0, 60, 70, 80, 90, 100]
 
 export const baseUrl = () => {
-  return 'http://127.0.0.1:7001'
+  return process.env.VUE_APP_URL
 }
 
 export const matchReg = (str) => {
