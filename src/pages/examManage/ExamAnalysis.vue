@@ -143,6 +143,123 @@
 					</el-table-column>
 				</el-table>
 			</el-card>
+			<el-card header="一、判断题" style="margin-top: 10px">
+				<el-table :data="examTFTopic">
+					<el-table-column label="题目编号" width="100px">
+						<template slot-scope="scope">
+							判断题-{{scope.$index + 1}}
+						</template>
+					</el-table-column>
+					<el-table-column label="正确率">
+						<template slot-scope="scope">
+							<div style="display: flex">
+								<el-progress
+									style="flex: 1"
+									show-text
+									:text-inside="true" :stroke-width="26"
+									:percentage="tfTrueNum(scope.row.answer)">
+								</el-progress>
+								<span style="display: inline-block;width: 80px; flex: 0 0 auto; text-align: center">{{scope.row.answer.filter(item=>item.result).length}}/{{scope.row.answer.length}}</span>
+							</div>
+						</template>
+					</el-table-column>
+					<el-table-column label="作答分布" width="100px">
+						<template slot-scope="scope">
+							未作答：{{examinee.length-scope.row.answer.length}}
+						</template>
+					</el-table-column>
+				</el-table>
+			</el-card>
+			<el-card header="二、选择题" style="margin-top: 10px">
+				<el-table :data="examSelectTopic">
+					<el-table-column label="题目编号" width="100px">
+						<template slot-scope="scope">
+							选择题-{{scope.$index + 1}}
+						</template>
+					</el-table-column>
+					<el-table-column label="正确率">
+						<template slot-scope="scope">
+							<div style="display: flex">
+								<el-progress
+									style="flex: 1"
+									show-text
+									:text-inside="true" :stroke-width="26"
+									:percentage="tfTrueNum(scope.row.answer)">
+								</el-progress>
+								<span style="display: inline-block;width: 80px; flex: 0 0 auto; text-align: center">{{scope.row.answer.filter(item=>item.result).length}}/{{scope.row.answer.length}}</span>
+							</div>
+						</template>
+					</el-table-column>
+					<el-table-column label="作答分布" width="250px">
+						<template slot-scope="scope">
+							<span v-for="(item,index) in scope.row.options" :key="index">
+								{{String.fromCharCode(index + 65)}}:{{scope.row.answer.filter(item=>item.answer === String.fromCharCode(index + 65)).length}}
+							</span>
+							未作答：{{examinee.length-scope.row.answer.length}}
+						</template>
+					</el-table-column>
+				</el-table>
+			</el-card>
+			<el-card header="三、程序填空题" style="margin-top: 10px">
+				<el-table :data="examGapTopic">
+					<el-table-column label="题目编号" width="120px">
+						<template slot-scope="scope">
+							程序填空题-{{scope.$index + 1}}
+						</template>
+					</el-table-column>
+					<el-table-column label="空格编号" width="100px">
+						<template slot-scope="scope">
+							<div class="analysis-gap" v-for="(item,index) in scope.row.gaps" :key="index">
+								空格{{index + 1}}
+							</div>
+						</template>
+					</el-table-column>
+					<el-table-column label="正确率">
+						<template slot-scope="scope">
+							<div class="analysis-gap" v-for="(item,index) in scope.row.gaps" :key="index" style="display: flex">
+								<el-progress
+									style="flex: 1"
+									show-text
+									:text-inside="true" :stroke-width="26"
+									:percentage="gapTrueNum(scope.row.answer, index)">
+								</el-progress>
+								<span style="display: inline-block;width: 130px; flex: 0 0 auto; text-align: center">{{scope.row.answer.filter(item=> item.result[index]).length}}/{{scope.row.answer.length}}未作答：{{examinee.length-scope.row.answer.length}}</span>
+							</div>
+						</template>
+					</el-table-column>
+				</el-table>
+			</el-card>
+			<el-card header="四、程序设计题" style="margin-top: 10px">
+				<el-table :data="examProgramTopic">
+					<el-table-column label="题目编号" width="120px">
+						<template slot-scope="scope">
+							程序设计题-{{scope.$index + 1}}
+						</template>
+					</el-table-column>
+					<el-table-column label="空格编号" width="100px">
+						<template slot-scope="scope">
+							<div class="analysis-gap" v-for="(item,index) in scope.row.answer[0].status" :key="index">
+								测试数据{{index + 1}}
+							</div>
+						</template>
+					</el-table-column>
+					<el-table-column label="正确率">
+						<template slot-scope="scope">
+							<div
+								class="analysis-gap" v-for="(item,index) in scope.row.answer[0].status" :key="index"
+								style="display: flex">
+								<el-progress
+									style="flex: 1"
+									show-text
+									:text-inside="true" :stroke-width="26"
+									:percentage="programTrueNum(scope.row.answer, index)">
+								</el-progress>
+								<span style="display: inline-block;width: 130px; flex: 0 0 auto; text-align: center">{{scope.row.answer.filter(item => item.status[index].status === 'Accepted' || item.status[index].status === 'Presentation Error').length}}/{{scope.row.answer.length}}未作答：{{examinee.length-scope.row.answer.length}}</span>
+							</div>
+						</template>
+					</el-table-column>
+				</el-table>
+			</el-card>
 		</el-card>
 	</div>
 </template>
@@ -158,17 +275,25 @@
         examInfo: {},
         examinee: [],
         notLoginExaminee: [],
-        isLoginExaminee: []
+        isLoginExaminee: [],
+        examTFTopic: [],
+        examSelectTopic: [],
+        examGapTopic: [],
+        examProgramTopic: []
       }
     },
     methods: {
       async examAnalysis() {
         try {
-          const {data: {examInfo, examinee}} = await api.examAnalysis({examId: this.examId})
+          const {data: {examInfo, examinee, examTFTopic, examSelectTopic, examGapTopic, examProgramTopic}} = await api.examAnalysis({examId: this.examId})
           this.examInfo = examInfo
           this.examinee = examinee
           this.notLoginExaminee = examinee.filter(item => !item.isLogin)
           this.isLoginExaminee = examinee.filter(item => item.isLogin)
+          this.examTFTopic = examTFTopic
+          this.examSelectTopic = examSelectTopic
+          this.examGapTopic = examGapTopic
+          this.examProgramTopic = examProgramTopic
         } catch (e) {
           console.error(e)
         }
@@ -180,10 +305,25 @@
         }
         return sum / numArray.length
       },
+      tfTrueNum(answer) {
+        const num = answer.filter(item => item.result).length
+        if (num === 0) return 0
+        return num * 100 / answer.length
+      },
       scoreNum(min, max) {
         return this.isLoginExaminee.filter(item => ((item.programScore + item.tfScore
           + item.selectScore + item.gapScore) >= min && ((item.programScore + item.tfScore
           + item.selectScore + item.gapScore) <= max))).length
+      },
+      gapTrueNum(answer, index) {
+        const num = answer.filter(item => item.result[index]).length
+        if (num === 0) return 0
+        return num * 100 / answer.length
+      },
+      programTrueNum(answer, index) {
+        const num = answer.filter(item => item.status[index].status === 'Accepted' || item.status[index].status === 'Presentation Error').length
+        if (num === 0) return 0
+        return num * 100 / answer.length
       }
     },
     mounted() {
@@ -192,6 +332,10 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+	.analysis-gap {
+		height: 30px;
+		align-items: center;
+		display: flex;
+	}
 </style>

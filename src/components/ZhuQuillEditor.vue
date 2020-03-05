@@ -5,7 +5,6 @@
 
 <script>
   import {QuillWatch} from 'quill-image-extend-module'
-  import {baseUrl} from "@/common/common"
 
   export default {
     name: "ZhuQuillEditor",
@@ -28,7 +27,7 @@
             ImageExtend: {
               loading: true,
               name: 'img',              // 后端接收的文件名称
-              action: baseUrl() + '/oj/upload', // 后端接收文件api
+              action: '/oj/upload', // 后端接收文件api
               response: (res) => {
                 return res.url // 此处返回的值一定要直接是后端回馈的图片在服务器的存储路径如：/images/xxx.jpg
               }

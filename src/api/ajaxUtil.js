@@ -1,22 +1,17 @@
 import axios from 'axios'
-import {setCookie, getCookie} from "@/common/cookieUtil"
-import {baseUrl} from "@/common/common"
+import {setCookie} from "@/common/cookieUtil"
 
 const timeout = 30 * 1000
 
-const baseURL = baseUrl()
-
 const headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
-const axiosInstance = axios.create({baseURL, timeout, headers})
+const axiosInstance = axios.create({timeout, headers})
 
 const requestInterceptor = function (config) {
   if (config.data instanceof FormData) {
     config.headers["Content-Type"] = 'multipart/form-data'
     config.headers["Accept"] = '*/*'
-    config.headers['cookies'] = `token=${getCookie('token') || ''}`
     return config
   }
-  config.headers['cookies'] = `token=${getCookie('token') || ''}`
   return config
 }
 axiosInstance.interceptors.request.use(requestInterceptor)
