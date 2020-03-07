@@ -90,7 +90,7 @@
         'userInfo'
       ]),
       editDisable() {
-        return this.common && this.userInfo.isAdmin
+        return this.common && !this.userInfo.isAdmin
       }
     },
     methods: {
