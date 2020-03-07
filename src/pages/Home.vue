@@ -5,12 +5,12 @@
 				<div class="logo">
 					<el-avatar :src="logo"></el-avatar>
 					<div class="title">暨阳Online Judge</div>
-					<el-button
-						@click="runner" class="none-button" size="mini" v-if="runnerStatus" icon="el-icon-video-pause"
-						type="info">暂停轮训
-					</el-button>
-					<el-button @click="runner" class="none-button" size="mini" v-else icon="el-icon-video-play" type="info">开始轮训
-					</el-button>
+<!--					<el-button-->
+<!--						@click="runner" class="none-button" size="mini" v-if="runnerStatus" icon="el-icon-video-pause"-->
+<!--						type="info">暂停轮训-->
+<!--					</el-button>-->
+<!--					<el-button @click="runner" class="none-button" size="mini" v-else icon="el-icon-video-play" type="info">开始轮训-->
+<!--					</el-button>-->
 				</div>
 				<el-menu
 					:default-active="defaultActive" @select="handleSelect" mode="horizontal" background-color="#24292e"

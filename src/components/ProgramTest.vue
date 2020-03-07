@@ -10,7 +10,7 @@
 								name="inputFile"
 								:on-success="uploadRes"
 								accept=".in"
-								:action="baseUrl+'/oj/testData/uploadProgramTest'"
+								action="/oj/testData/uploadProgramTest"
 								:data="{programId, programType, testId: scope.row._id}">
 							<i class="el-icon-upload test-icon"></i>
 						</el-upload>
@@ -21,7 +21,7 @@
 					<template slot-scope="scope">
 						<el-upload
 								v-if="!scope.row.outputFile" :show-file-list="false" :headers="headers" name="outputFile"
-								:action="baseUrl+'/oj/testData/uploadProgramTest'"
+								action="/oj/testData/uploadProgramTest"
 								accept=".out"
 								:disabled="disabled"
 								:on-success="uploadRes"
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-  import {getCookie} from '@/common/cookieUtil'
   import api from '@/api/testData'
   import AceEditor from '@/components/AceEditor'
 
@@ -105,7 +104,6 @@
         visible: this.value,
         baseUrl: process.env.VUE_APP_URL,
         headers: {
-          cookies: `token=${getCookie('token') || ''}`
         },
         loading: true,
         code: '',
@@ -148,7 +146,7 @@
     methods: {
       downloadTest(filename) {
         if (this.disabled) return
-        window.location.href = this.baseUrl + '/public/' + filename
+        window.location.href = '/oj/public/' + filename
       },
       uploadRes(responce) {
         if (responce.code) {
