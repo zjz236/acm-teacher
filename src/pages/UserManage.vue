@@ -80,6 +80,8 @@
   import PageTitle from '@/components/PageTitle'
   import api from '@/api/account'
   import moment from 'moment'
+  import {mapState} from 'vuex'
+  import { JSEncrypt } from 'jsencrypt'
 
   export default {
     name: 'user-manage',
@@ -160,13 +162,19 @@
         this.getUserList()
       },
       async addUser() {
+        if (!this.publicKey) {
+          return this.$message.error('系统异常')
+        }
         try {
-          await api.addUser({
+          const encrypt = new JSEncrypt()
+          encrypt.setPublicKey(this.publicKey);
+          const res = await api.addUser({
             ...this.form,
             editable: this.editable,
+            password: encrypt.encrypt(this.form.password),
             userId: this.userId
           })
-          this.$message.success('添加成功')
+          this.$message.success(res.msg)
           this.getUserList()
           this.visible = false
         } catch (e) {
@@ -210,6 +218,11 @@
           console.error(e)
         }
       }
+    },
+    computed: {
+      ...mapState([
+        'publicKey'
+      ]),
     }
   }
 </script>
