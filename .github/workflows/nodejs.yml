@@ -5,8 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches:
-      - v1.2.0_毕设
+    branches: v1.2.0_毕设
 
 jobs:
   build:
@@ -15,14 +14,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1.2.0_毕设
+        with:
+          fetch-depth: 2
+
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: Build Project # 此步骤（step）的名字
-      - run: npm install
-      - run: npm run build
-      - run: ls dist/
+        run: npm install && npm run build
+
+      - name: List output files
+        run: ls -a dist # 显示生成的目录文件
 
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@3.0.0
