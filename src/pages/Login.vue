@@ -27,7 +27,7 @@
         </el-card>
       </div>
       <div class="footer">技术支持：计算机162-
-        <a target="_blank" rel="noopener noreferrer" href="https://zjz236.github.io/">朱锦泽</a>, 黄梦霞
+        <a target="_blank" rel="noopener noreferrer" href="https://zjz236.github.io/">朱锦泽</a>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
 <script>
   import logo from '@/assets/images/blue_logo.png'
   import api from '@/api/account'
-  import { JSEncrypt } from 'jsencrypt'
+  import {JSEncrypt} from 'jsencrypt'
 
   export default {
     name: 'Login',
@@ -80,10 +80,11 @@
         }
         try {
           const encrypt = new JSEncrypt()
-          encrypt.setPublicKey(this.publicKey);
+          encrypt.setPublicKey(this.publicKey)
           const res = await api.login({
             ...this.loginForm,
-            password: encrypt.encrypt(this.loginForm.password)
+            password: encrypt.encrypt(this.loginForm.password),
+            publicKey: this.publicKey
           })
           if (res.code === 1) {
             this.$router.push('/')

@@ -63,6 +63,9 @@
         loading: false
       }
     },
+    beforeDestroy () {
+      clearTimeout(this.timer)
+    },
     methods: {
       async getExamInfo() {
         this.loading = true

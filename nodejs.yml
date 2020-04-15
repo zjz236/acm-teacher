@@ -1,0 +1,34 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - v1.2.0_毕设
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+
+    steps:
+      - uses: actions/checkout@v1.2.0_毕设
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Build Project # 此步骤（step）的名字
+      - run: npm install
+      - run: npm run build
+      - run: ls dist/
+
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@3.0.0
+        with:
+          ftp-server: sftp://39.97.112.236:22 # 服务器地址和端口（可以填域名，不过我服务器做了全站加速会导向加速结点的IP，所以只能用服务器的IP）
+          ftp-username: ${{ secrets.FTP_USERNAME }} # FTP用户名
+          ftp-password: ${{ secrets.FTP_PASSWORD }} # FTP密码
+          git-ftp-args: --insecure --remote-root /usr/local/nginx/html/admin # 要部署到服务器的哪个位置（我这用的是SFTP，如果是FTP连接的话--insecure不用加）
+          local-dir: dist/ # 选择哪些文件要部署到服务器，这个选项在这里选了之后，要在.git-ftp-include中添加相应的路径

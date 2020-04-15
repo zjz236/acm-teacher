@@ -25,6 +25,10 @@
 						<i class="el-icon-document-checked"></i>
 						<span slot="title">试卷分析</span>
 					</el-menu-item>
+          <el-menu-item index="examNotice" @click="linkGo('examNotice')">
+            <i class="el-icon-chat-line-round"></i>
+            <span slot="title">发布通知</span>
+          </el-menu-item>
 				</el-menu>
 			</el-aside>
 			<el-main>

@@ -22,6 +22,7 @@ import ExamProgramTopic from "@/pages/examManage/topic/ProgramTopic"
 import ExamGrade from "@/pages/examManage/ExamGrade"
 import ExamReader from "@/pages/examManage/ExamReader"
 import ExamAnalysis from "@/pages/examManage/ExamAnalysis"
+import ExamNotice from "@/pages/examManage/ExamNotice"
 import UserManage from '@/pages/UserManage'
 import IDE from "@/pages/IDE"
 
@@ -129,6 +130,11 @@ export default {
               path: 'examAnalysis/:examId',
               name: 'examAnalysis',
               component: ExamAnalysis
+            },
+            {
+              path: 'examNotice/:examId',
+              name: 'examNotice',
+              component: ExamNotice
             }
           ]
         },

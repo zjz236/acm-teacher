@@ -1,7 +1,7 @@
 <template>
 	<editor
 			ref="myEditor" :value="value" @input="inputChange" @init="editorInit" :lang="lang"
-			:theme="theme" :height="height" :options="options"></editor>
+			theme="chrome" :height="height" :options="options"></editor>
 </template>
 
 <script>
@@ -29,7 +29,7 @@
       },
       theme: {
         type: String,
-        default: 'clouds'
+        default: 'chrome'
       }
     },
     data() {

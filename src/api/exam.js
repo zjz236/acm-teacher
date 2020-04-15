@@ -5,5 +5,9 @@ export default {
   examEdit: ajaxService.createAssistantApiMethodPost('/oj/examList/examEdit'),
   getExamList: ajaxService.createAssistantApiMethodGet('/oj/examList/getExamList'),
   getExamInfo: ajaxService.createAssistantApiMethodGet('/oj/examList/getExamInfo'),
-  examAnalysis: ajaxService.createAssistantApiMethodGet('/oj/examList/examAnalysis')
+  examAnalysis: ajaxService.createAssistantApiMethodGet('/oj/examList/examAnalysis'),
+  getExamNotice: ajaxService.createAssistantApiMethodGet('/oj/examList/getExamNotice'),
+  deleteExamNotice: ajaxService.createAssistantApiMethodGet('/oj/examList/deleteExamNotice'),
+  deleteExam: ajaxService.createAssistantApiMethodGet('/oj/examList/deleteExam'),
+  examNoticeModify: ajaxService.createAssistantApiMethodPost('/oj/examList/examNoticeModify')
 }

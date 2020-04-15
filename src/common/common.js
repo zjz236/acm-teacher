@@ -34,7 +34,8 @@ export const routerActive = {
     'examProgramTopic',
     'examGrade',
     'examReader',
-    'examAnalysis'],
+    'examAnalysis',
+    'examNotice'],
   classes: ['classes', 'addClasses'],
   mine: ['mineTopic', 'mineTF', 'mineSelect', 'mineGap', 'mineProgram'],
   common: ['commonTopic', 'commonTF', 'commonSelect', 'commonGap', 'commonProgram'],
@@ -45,7 +46,8 @@ export const examMenu = {
   examinee: ['examinee', 'examineeAdd', 'examineeModifyAdd', 'examineeModifyEdit'],
   examGrade: ['examGrade'],
   examReader: ['examReader'],
-  examAnalysis: ['examAnalysis']
+  examAnalysis: ['examAnalysis'],
+  examNotice: ['examNotice']
 }
 export const topicMenu = {
   tfTopic: ['mineTF', 'commonTF'],
