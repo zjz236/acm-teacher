@@ -14,8 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
 
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
@@ -31,11 +29,15 @@ jobs:
       - name: List output files
         run: ls -a dist # 显示生成的目录文件
 
-      - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@3.0.0
-        with:
-          ftp-server: sftp://39.97.112.236:22/ # 服务器地址和端口
-          ftp-username: ${{ secrets.FTP_USERNAME }} # FTP用户名
-          ftp-password: ${{ secrets.FTP_PASSWORD }} # FTP密码
-          git-ftp-args: --insecure --remote-root /usr/local/nginx/html/admin # 要部署到服务器的哪个位置（我这用的是SFTP，如果是FTP连接的话--insecure不用加）
-          local-dir: ./dist/ # 选择哪些文件要部署到服务器，这个选项在这里选了之后，要在.git-ftp-include中添加相应的路径
+      # step2: 将源码复制到服务器 #坑
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.0.8
+        env:
+          # 这个地方的用法会在下面解释，简单的说就是一个变量
+          # 为了安全，被写在一个其他的地方
+          SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USER }}
+          SOURCE: 'dist/'
+          TARGET: '/usr/local/nginx/html/admin/'
+          ARGS: '-avzr --delete'
