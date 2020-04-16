@@ -21,7 +21,7 @@ jobs:
           node-version: '12.x'
 
       - name: Checkout # 此步骤（step）的名字
-        run: git checkout -b v1.2.0_毕设 origin/v1.2.0_毕设
+        run: git checkout v1.2.0_毕设
 
       - name: Build Project # 此步骤（step）的名字
         run: npm install && npm run build
