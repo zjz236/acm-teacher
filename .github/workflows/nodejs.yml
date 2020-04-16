@@ -31,7 +31,7 @@ jobs:
 
       # step2: 将源码复制到服务器 #坑
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.0.8
+        uses: easingthemes/ssh-deploy@v2.1.2
         env:
           # 这个地方的用法会在下面解释，简单的说就是一个变量
           # 为了安全，被写在一个其他的地方
