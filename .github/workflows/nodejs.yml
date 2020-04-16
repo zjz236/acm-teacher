@@ -31,6 +31,12 @@ jobs:
       - name: List output files
         run: ls -a dist # 显示生成的目录文件
 
+      - name: Git Version
+        run: git --version # 显示生成的目录文件
+
+      - name: Git Version
+        run: git-ftp --version # 显示生成的目录文件
+
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@3.0.0
         with:
