@@ -38,6 +38,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USER }}
-          SOURCE: './dist/'
+          SOURCE: ''
           TARGET: '/usr/local/nginx/html/admin/'
           ARGS: '-avzr --delete'
