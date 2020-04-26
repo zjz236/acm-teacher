@@ -84,7 +84,7 @@
   import moment from 'moment'
   import api from '@/api/account'
   import run from '@/api/round'
-  import {mapState, mapActions} from 'vuex'
+  import {mapState} from 'vuex'
   import {delCookie} from '@/common/cookieUtil'
   import {routerMenu, routerActive} from '@/common/common'
   import { JSEncrypt } from 'jsencrypt'
@@ -116,6 +116,7 @@
         name: '',
         time: moment().format('YYYY年MM月DD日 HH:mm:ss'),
         activeMenu: '',
+        publicKey: '',
         runnerStatus: false,
         userForm: {
           username: '',
@@ -160,8 +161,7 @@
     },
     computed: {
       ...mapState([
-        'userInfo',
-        'publicKey'
+        'userInfo'
       ]),
       defaultActive() {
         const routeName = this.$route.name
@@ -181,7 +181,7 @@
       handleSubmit() {
         this.$refs.userForm.validate(valid => {
           if (valid) {
-            this.addUser()
+            this.getPublicKey()
           }
         })
       },
@@ -197,7 +197,8 @@
             userId: this.userInfo._id,
             editable : true,
             password: encrypt.encrypt(this.userForm.password),
-            confirmPassword : ''
+            confirmPassword : '',
+            publicKey: this.publicKey
           })
           this.$message.success('修改成功')
           this.visible = false
@@ -208,7 +209,8 @@
       async getPublicKey() {
         try {
           const {data} = await api.getPublicKey()
-          this.updatePublicKey(data)
+          this.publicKey = data
+          this.addUser()
         } catch (e) {
           console.error(e)
         }
@@ -246,14 +248,12 @@
         this.$router.replace({name: routerMenu[key]}).catch(err => {
           err
         })
-      },
-      ...mapActions(['updatePublicKey'])
+      }
     },
     mounted() {
       setInterval(() => {
         this.time = moment().format('YYYY年MM月DD日 HH:mm:ss')
       }, 1000)
-      this.getPublicKey()
     }
   }
 </script>

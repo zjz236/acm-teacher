@@ -26,7 +26,7 @@
 				</template>
 			</el-table-column>
 			<el-table-column label="操作">
-				<template slot-scope="scope">
+				<template slot-scope="scope" v-if="!scope.row.isAdmin">
 					<el-tooltip content="修改" placement="top">
 						<i class="el-icon-edit el-icon" @click="modifyUser(scope.row._id)"></i>
 					</el-tooltip>
@@ -80,7 +80,6 @@
   import PageTitle from '@/components/PageTitle'
   import api from '@/api/account'
   import moment from 'moment'
-  import {mapState} from 'vuex'
   import { JSEncrypt } from 'jsencrypt'
 
   export default {
@@ -97,6 +96,7 @@
         visible: false,
         editable: false,
         userId: '',
+				publicKey: '',
         form: {
           username: '',
           password: '',
@@ -139,6 +139,16 @@
         this.visible = true
         this.editable = false
       },
+			async getPublicKey() {
+				try {
+					const {data} = await api.getPublicKey()
+					this.publicKey = data
+					this.addUser()
+				} catch (e) {
+					console.error(e)
+					this.loading = false
+				}
+			},
       async modifyUser(id) {
         try {
           for (const index in this.form) {
@@ -172,7 +182,8 @@
             ...this.form,
             editable: this.editable,
             password: encrypt.encrypt(this.form.password),
-            userId: this.userId
+            userId: this.userId,
+						publicKey: this.publicKey
           })
           this.$message.success(res.msg)
           this.getUserList()
@@ -184,7 +195,7 @@
       submit() {
         this.$refs.form.validate(valid => {
           if (valid) {
-            this.addUser()
+            this.getPublicKey()
           }
         })
       },
@@ -218,11 +229,6 @@
           console.error(e)
         }
       }
-    },
-    computed: {
-      ...mapState([
-        'publicKey'
-      ]),
     }
   }
 </script>

@@ -22,7 +22,9 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
-  store.dispatch('updateUser')
+  if (to.name !== 'login') {
+    store.dispatch('updateUser')
+  }
   next()
 })
 

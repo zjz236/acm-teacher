@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" v-loading="loading">
     <el-carousel height="100vh" direction="vertical" :autoplay="true" :interval="4000">
       <el-carousel-item v-for="item in 3" :key="item" :class="`carousel_${item}`">
       </el-carousel-item>
@@ -48,6 +48,7 @@
           password: ''
         },
         publicKey: '',
+        loading: false,
         loginRule: {
           username: [
             {required: true, message: '请输入用户名', trigger: 'blur'}
@@ -62,7 +63,8 @@
       submit() {
         this.$refs.loginForm.validate(valid => {
           if (valid) {
-            this.login()
+            this.loading = true
+            this.getPublicKey()
           }
         })
       },
@@ -70,8 +72,10 @@
         try {
           const {data} = await api.getPublicKey()
           this.publicKey = data
+          this.login()
         } catch (e) {
           console.error(e)
+          this.loading = false
         }
       },
       async login() {
@@ -91,11 +95,12 @@
           }
         } catch (e) {
           console.error(e)
+        } finally {
+          this.loading = false
         }
       }
     },
     created() {
-      this.getPublicKey()
     }
   }
 </script>
