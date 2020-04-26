@@ -1,5 +1,5 @@
 <template>
-  <div class="login" v-loading="loading">
+  <div class="login">
     <el-carousel height="100vh" direction="vertical" :autoplay="true" :interval="4000">
       <el-carousel-item v-for="item in 3" :key="item" :class="`carousel_${item}`">
       </el-carousel-item>
@@ -10,7 +10,7 @@
       </div>
       <div class="title"><h1>暨阳学院Online Judge</h1></div>
       <div class="login-form">
-        <el-card class="form-card">
+        <el-card class="form-card" v-loading="loading">
           <el-form
             :model="loginForm" label-position="top" ref="loginForm" @keydown.enter.native="submit"
             :rules="loginRule">
