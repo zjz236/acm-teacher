@@ -38,8 +38,8 @@ jobs:
           # 这个地方的用法会在下面解释，简单的说就是一个变量
           # 为了安全，被写在一个其他的地方
           SSH_PRIVATE_KEY: ${{ secrets.TOKEN }}
-          REMOTE_HOST: '39.97.112.236'
-          REMOTE_USER: 'root'
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USER }}
           SOURCE: 'dist/'
           TARGET: '/usr/local/nginx/html/admin/'
           ARGS: '-avzr --delete'

@@ -66,7 +66,7 @@
 <script>
   import classApi from '@/api/classes'
   import examineeApi from '@/api/examinee'
-  import {baseUrl, examineeTable} from "@/common/common"
+  import {examineeTable} from "@/common/common"
   import XLSX from 'xlsx'
 
   export default {
@@ -112,6 +112,7 @@
           password: '',
           school: '',
           college: '',
+          major: '',
           className: '',
           name: '',
           sex: 1,
@@ -175,7 +176,7 @@
         }
       },
       templateDownload() {
-        window.location.href = baseUrl() + '/oj/download/excel/examineeTemplate.xlsx'
+        window.location.href = '/oj/excel/examineeTemplate.xlsx'
       },
       uploadStudent() {
         this.$refs.inputFile.click()

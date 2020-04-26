@@ -108,7 +108,6 @@
   import PageTitle from '@/components/PageTitle'
   import XLSX from 'xlsx'
   import api from '@/api/classes'
-  import {baseUrl} from "@/common/common"
 
   export default {
     name: "AddClasses",
@@ -213,7 +212,7 @@
         this.tableData[index][type] = e.trim()
       },
       templateDownload() {
-        window.location.href = baseUrl()+'/oj/download/excel/classesTemplate.xlsx'
+        window.location.href = '/oj/public/excel/classesTemplate.xlsx'
       },
       deleteStudent(index) {
         this.tableData.splice(index, 1)
