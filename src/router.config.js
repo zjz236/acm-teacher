@@ -1,3 +1,6 @@
+import VueRouter from 'vue-router'
+import Vue from 'vue'
+
 const Home = () => import('@/pages/Home')
 const Login = () => import('@/pages/Login')
 const Index = () => import('@/pages/Index')
@@ -26,7 +29,7 @@ const ExamNotice = () => import('@/pages/examManage/ExamNotice')
 const UserManage = () => import('@/pages/UserManage')
 const IDE = () => import('@/pages/IDE')
 
-export default {
+const router = {
   mode: 'history',
   base: '/admin/',
   routes: [
@@ -38,32 +41,50 @@ export default {
         {
           path: '/',
           name: 'index',
-          component: Index
+          component: Index,
+          meta: {
+            title: '首页'
+          }
         },
         {
           path: '/examList',
           name: 'examList',
-          component: ExamList
+          component: ExamList,
+          meta: {
+            title: '考试管理'
+          }
         },
         {
           path: '/addExam',
           name: 'addExam',
-          component: ExamModify
+          component: ExamModify,
+          meta: {
+            title: '添加考试'
+          }
         },
         {
           path: '/classes',
           name: 'classes',
-          component: Classes
+          component: Classes,
+          meta: {
+            title: '班级管理'
+          }
         },
         {
           path: '/addClasses',
           name: 'addClasses',
-          component: ClassesModify
+          component: ClassesModify,
+          meta: {
+            title: '添加班级'
+          }
         },
         {
           path: '/editClasses/:id',
           name: 'editClasses',
-          component: ClassesModify
+          component: ClassesModify,
+          meta: {
+            title: '修改班级'
+          }
         },
         {
           path: '/examManage',
@@ -74,67 +95,106 @@ export default {
             {
               path: 'examEdit/:examId',
               name: 'examEdit',
-              component: ExamEdit
+              component: ExamEdit,
+              meta: {
+                title: '考试修改'
+              }
             },
             {
               path: 'examinee/:examId',
               name: 'examinee',
-              component: Examinee
+              component: Examinee,
+              meta: {
+                title: '考生管理'
+              }
             },
             {
               path: 'examineeAdd/:examId',
               name: 'examineeAdd',
-              component: ExamineeAdd
+              component: ExamineeAdd,
+              meta: {
+                title: '考生批量修改'
+              }
             },
             {
               path: 'examineeModify/add/:examId',
               name: 'examineeModifyAdd',
-              component: ExamineeModify
+              component: ExamineeModify,
+              meta: {
+                title: '单个考生添加'
+              }
             },
             {
               path: 'examineeModify/edit/:examId/:examineeId',
               name: 'examineeModifyEdit',
-              component: ExamineeModify
+              component: ExamineeModify,
+              meta: {
+                title: '单个考生修改'
+              }
             },
             {
               path: 'tfTopic/:examId',
               name: 'examTFTopic',
-              component: ExamTFTopic
+              component: ExamTFTopic,
+              meta: {
+                title: '考试判断题'
+              }
             },
             {
               path: 'selectTopic/:examId',
               name: 'examSelectTopic',
-              component: ExamSelectTopic
+              component: ExamSelectTopic,
+              meta: {
+                title: '考试选择题'
+              }
             },
             {
               path: 'gapTopic/:examId',
               name: 'examGapTopic',
-              component: ExamGapTopic
+              component: ExamGapTopic,
+              meta: {
+                title: '考试程序填空题'
+              }
             },
             {
               path: 'programTopic/:examId',
               name: 'examProgramTopic',
-              component: ExamProgramTopic
+              component: ExamProgramTopic,
+              meta: {
+                title: '考试程序设计题'
+              }
             },
             {
               path: 'examGrade/:examId',
               name: 'examGrade',
-              component: ExamGrade
+              component: ExamGrade,
+              meta: {
+                title: '考试评测'
+              }
             },
             {
               path: 'examReader/:examId',
               name: 'examReader',
-              component: ExamReader
+              component: ExamReader,
+              meta: {
+                title: '试卷预览'
+              }
             },
             {
               path: 'examAnalysis/:examId',
               name: 'examAnalysis',
-              component: ExamAnalysis
+              component: ExamAnalysis,
+              meta: {
+                title: '试卷分析'
+              }
             },
             {
               path: 'examNotice/:examId',
               name: 'examNotice',
-              component: ExamNotice
+              component: ExamNotice,
+              meta: {
+                title: '发布通知'
+              }
             }
           ]
         },
@@ -151,22 +211,34 @@ export default {
             {
               path: 'tfTopic',
               name: 'mineTF',
-              component: TFTopic
+              component: TFTopic,
+              meta: {
+                title: '我的题库-判断题'
+              }
             },
             {
               path: 'selectTopic',
               name: 'mineSelect',
-              component: SelectTopic
+              component: SelectTopic,
+              meta: {
+                title: '我的题库-选择题'
+              }
             },
             {
               path: 'gapTopic',
               name: 'mineGap',
-              component: GapTopic
+              component: GapTopic,
+              meta: {
+                title: '我的题库-程序填空题'
+              }
             },
             {
               path: 'programTopic',
               name: 'mineProgram',
-              component: ProgramTopic
+              component: ProgramTopic,
+              meta: {
+                title: '我的题库-程序设计题'
+              }
             }
           ]
         },
@@ -179,41 +251,64 @@ export default {
             {
               path: 'tfTopic',
               name: 'commonTF',
-              component: TFTopic
+              component: TFTopic,
+              meta: {
+                title: '公共题库-判断题'
+              }
             },
             {
               path: 'selectTopic',
               name: 'commonSelect',
-              component: SelectTopic
+              component: SelectTopic,
+              meta: {
+                title: '公共题库-选择题'
+              }
             },
             {
               path: 'gapTopic',
               name: 'commonGap',
-              component: GapTopic
+              component: GapTopic,
+              meta: {
+                title: '公共题库-程序填空题'
+              }
             },
             {
               path: 'programTopic',
               name: 'commonProgram',
-              component: ProgramTopic
+              component: ProgramTopic,
+              meta: {
+                title: '公共题库-程序设计题'
+              }
             }
           ]
         },
         {
           path: '/ide',
           name: 'ide',
-          component: IDE
+          component: IDE,
+          meta: {
+            title: '在线IDE'
+          }
         },
         {
           path: '/userManage',
           name: 'userManage',
-          component: UserManage
+          component: UserManage,
+          meta: {
+            title: '用户管理'
+          }
         }
       ]
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        title: '登录'
+      }
     }
   ]
 }
+Vue.use(VueRouter)
+export default new VueRouter(router)

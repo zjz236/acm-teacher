@@ -23,13 +23,13 @@
             <el-menu-item index="mine">个人题库</el-menu-item>
           </el-submenu>
           <el-menu-item index="classes">班级管理</el-menu-item>
-          <el-menu-item index="userManage" v-if="isAdmin">用户管理</el-menu-item>
+          <el-menu-item index="userManage" v-if="userInfo.isAdmin">用户管理</el-menu-item>
           <el-menu-item index="ide">在线IDE</el-menu-item>
         </el-menu>
         <div class="setting">
           <div class="time">{{time}}</div>
           <el-dropdown>
-            <el-avatar v-if="name">{{name}}</el-avatar>
+            <el-avatar v-if="userInfo.trueName">{{userInfo.trueName.substr(0,1)}}</el-avatar>
             <el-avatar v-else icon="el-icon-user-solid"></el-avatar>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="visible = true">修改信息</el-dropdown-item>
@@ -115,7 +115,6 @@
         logo,
         name: '',
         time: moment().format('YYYY年MM月DD日 HH:mm:ss'),
-        isAdmin: false,
         activeMenu: '',
         runnerStatus: false,
         userForm: {
@@ -179,21 +178,6 @@
       }
     },
     methods: {
-      async getUserInfo() {
-        try {
-          const res = await api.getUserInfo()
-          if (res.code === 1) {
-            this.updateUser({
-              ...res.data
-            })
-          }
-          this.updateUser(res.data)
-          this.isAdmin = res.data.isAdmin
-          this.name = res.data.trueName.substr(0, 1)
-        } catch (e) {
-          console.error(e)
-        }
-      },
       handleSubmit() {
         this.$refs.userForm.validate(valid => {
           if (valid) {
@@ -263,14 +247,13 @@
           err
         })
       },
-      ...mapActions(['updateUser', 'updatePublicKey'])
+      ...mapActions(['updatePublicKey'])
     },
     mounted() {
       setInterval(() => {
         this.time = moment().format('YYYY年MM月DD日 HH:mm:ss')
       }, 1000)
       this.getPublicKey()
-      this.getUserInfo()
     }
   }
 </script>

@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import api from '@/api/account'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -16,8 +17,13 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    updateUser(context, userInfo) {
-      context.commit('updateUser', userInfo)
+    async updateUser(context) {
+      try {
+        const res = await api.getUserInfo()
+        context.commit('updateUser', res.data)
+      } catch (e) {
+        console.error(e)
+      }
     },
     updatePublicKey(context, publicKey) {
       context.commit('updatePublicKey', publicKey)
