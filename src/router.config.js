@@ -1,30 +1,30 @@
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
-import Index from '@/pages/Index'
-import ExamList from '@/pages/ExamList'
-import ExamModify from '@/pages/ExamModify'
-import Classes from '@/pages/Classes'
-import ClassesModify from '@/pages/ClassesModify'
-import ExamManage from '@/pages/ExamManage'
-import ExamEdit from '@/pages/examManage/ExamEdit'
-import Examinee from '@/pages/examManage/examinee/Examinee'
-import ExamineeAdd from "@/pages/examManage/examinee/ExamineeAdd"
-import ExamineeModify from "@/pages/examManage/examinee/ExamineeModify"
-import Topic from "@/pages/topic/Topic"
-import TFTopic from "@/pages/topic/TFTopic"
-import SelectTopic from "@/pages/topic/SelectTopic"
-import GapTopic from "@/pages/topic/GapTopic"
-import ProgramTopic from "@/pages/topic/ProgramTopic"
-import ExamTFTopic from "@/pages/examManage/topic/TFTopic"
-import ExamSelectTopic from "@/pages/examManage/topic/SelectTopic"
-import ExamGapTopic from "@/pages/examManage/topic/GapTopic"
-import ExamProgramTopic from "@/pages/examManage/topic/ProgramTopic"
-import ExamGrade from "@/pages/examManage/ExamGrade"
-import ExamReader from "@/pages/examManage/ExamReader"
-import ExamAnalysis from "@/pages/examManage/ExamAnalysis"
-import ExamNotice from "@/pages/examManage/ExamNotice"
-import UserManage from '@/pages/UserManage'
-import IDE from "@/pages/IDE"
+const Home = () => import('@/pages/Home')
+const Login = () => import('@/pages/Login')
+const Index = () => import('@/pages/Index')
+const ExamList = () => import('@/pages/ExamList')
+const ExamModify = () => import('@/pages/ExamModify')
+const Classes = () => import('@/pages/Classes')
+const ClassesModify = () => import('@/pages/ClassesModify')
+const ExamManage = () => import('@/pages/ExamManage')
+const ExamEdit = () => import('@/pages/examManage/ExamEdit')
+const Examinee = () => import('@/pages/examManage/examinee/Examinee')
+const ExamineeAdd = () => import('@/pages/examManage/examinee/ExamineeAdd')
+const ExamineeModify = () => import('@/pages/examManage/examinee/ExamineeModify')
+const Topic = () => import('@/pages/topic/Topic')
+const TFTopic = () => import('@/pages/topic/TFTopic')
+const SelectTopic = () => import('@/pages/topic/SelectTopic')
+const GapTopic = () => import('@/pages/topic/GapTopic')
+const ProgramTopic = () => import('@/pages/topic/ProgramTopic')
+const ExamTFTopic = () => import('@/pages/examManage/topic/TFTopic')
+const ExamSelectTopic = () => import('@/pages/examManage/topic/SelectTopic')
+const ExamGapTopic = () => import('@/pages/examManage/topic/GapTopic')
+const ExamProgramTopic = () => import('@/pages/examManage/topic/ProgramTopic')
+const ExamGrade = () => import('@/pages/examManage/ExamGrade')
+const ExamReader = () => import('@/pages/examManage/ExamReader')
+const ExamAnalysis = () => import('@/pages/examManage/ExamAnalysis')
+const ExamNotice = () => import('@/pages/examManage/ExamNotice')
+const UserManage = () => import('@/pages/UserManage')
+const IDE = () => import('@/pages/IDE')
 
 export default {
   mode: 'history',
