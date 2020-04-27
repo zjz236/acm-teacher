@@ -26,7 +26,7 @@
           </el-form>
         </el-card>
       </div>
-      <div class="footer">技术支持：计算机162-
+      <div class="footer">浙ICP备18055051号&emsp;技术支持：计算机162-
         <a target="_blank" rel="noopener noreferrer" href="https://zjz236.github.io/">朱锦泽</a>
       </div>
     </div>
